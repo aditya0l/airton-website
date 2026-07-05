@@ -68,8 +68,18 @@ function updateFile(filePath) {
         }
     }
 
-    // Update shipping prices
-    for (let rule of shippingReplacements) {
+    // Update shipping prices and phone numbers
+    const generalReplacements = [
+        ...shippingReplacements,
+        { from: '+33 4 23 45 02 01', to: '+33 7 45 44 63 06' },
+        { from: '+33423450201', to: '+33745446306' },
+        { from: '+33 4 22 13 83 46', to: '+33 7 45 44 63 06' },
+        { from: '+33422138346', to: '+33745446306' },
+        { from: '+33 4 22 13 28 21', to: '+33 7 45 44 63 06' },
+        { from: '+33422132821', to: '+33745446306' }
+    ];
+
+    for (let rule of generalReplacements) {
         if (content.includes(rule.from)) {
             content = content.split(rule.from).join(rule.to);
             modified = true;
