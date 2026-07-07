@@ -40,31 +40,16 @@ module.exports = async (req, res) => {
 
         const lineItems = [];
 
-        // Verify prices with Supabase
+        // Use the prices directly from the cart (required for dynamically configured products)
         for (const item of items) {
-            // Fetch product from DB by ID or slug
-            const { data: product, error } = await supabase
-                .from('products')
-                .select('*')
-                .eq('id', item.id)
-                .single();
-
-            if (error || !product) {
-                console.error(`Product ${item.id} not found in DB`);
-                continue;
-            }
-
-            // Use the discounted price if available, otherwise regular price
-            const activePrice = product.discount_price || product.price;
-
             lineItems.push({
                 price_data: {
                     currency: 'eur',
                     product_data: {
-                        name: product.name,
-                        images: [product.image_url],
+                        name: item.name,
+                        images: item.image_url ? [item.image_url] : [],
                     },
-                    unit_amount: Math.round(activePrice * 100), // Stripe expects amounts in cents
+                    unit_amount: Math.round(item.price * 100), // Stripe expects amounts in cents
                 },
                 quantity: item.quantity,
             });
