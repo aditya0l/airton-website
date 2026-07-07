@@ -74,32 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
     interceptForms();
 });
 
-// Handle variant changes on static sites to update price natively
-document.addEventListener("variant:changed", (e) => {
-    const variant = e.detail.variant;
-    if (variant && variant.price) {
-        // Format price
-        let priceStr = (variant.price / 100).toFixed(2);
-        // Sometimes prices are formatted with comma
-        priceStr = priceStr.replace('.', ',');
-        
-        // Find price blocks
-        const priceEls = document.querySelectorAll('.price-item--regular, .price .price__regular .price-item');
-        priceEls.forEach(el => {
-            el.innerHTML = `€${priceStr}`;
-        });
-        
-        // Make sure Add to Cart stays active (since static HTML fetch will fail to update it properly)
-        const atcBtns = document.querySelectorAll('button[name="add"], .product-form__submit');
-        atcBtns.forEach(btn => {
-            if (variant.available) {
-                btn.removeAttribute('disabled');
-                const textSpan = btn.querySelector('.btn__text');
-                if (textSpan) textSpan.innerHTML = 'Ajouter au panier';
-            }
-        });
-    }
-});
+
 // 1. Block the theme's native fetch for static HTML
 const originalFetch = window.fetch;
 window.fetch = function() {
