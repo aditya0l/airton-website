@@ -9,6 +9,7 @@ function saveCart(cart) {
     localStorage.setItem('airton_cart', JSON.stringify(cart));
     updateCartIcon();
     renderCart(); // If on cart page
+    if (typeof renderCartDrawer === 'function') renderCartDrawer();
 }
 
 function addToCart(product, quantity = 1) {
@@ -51,6 +52,7 @@ function clearCart() {
     localStorage.removeItem('airton_cart');
     updateCartIcon();
     renderCart();
+    if (typeof renderCartDrawer === 'function') renderCartDrawer();
 }
 
 function updateCartIcon() {
@@ -110,6 +112,15 @@ function setupAddToCartInterception() {
             e.stopPropagation();
             if (window.airtonCurrentProduct) {
                 addToCart(window.airtonCurrentProduct, 1);
+                // Try to open the cart drawer automatically
+                const cartDrawer = document.querySelector('cart-drawer');
+                if (cartDrawer && typeof cartDrawer.open === 'function') {
+                    cartDrawer.open();
+                } else if (cartDrawer && cartDrawer.classList) {
+                    cartDrawer.classList.add('is-active', 'active');
+                    cartDrawer.removeAttribute('hidden');
+                    document.body.classList.add('overflow-hidden');
+                }
             } else {
                 alert("Erreur: Impossible d'ajouter ce produit au panier.");
             }
@@ -234,6 +245,7 @@ function setupCheckoutButton() {
 function initCart() {
     updateCartIcon();
     renderCart();
+    if (typeof renderCartDrawer === 'function') renderCartDrawer();
     setupCheckoutButton();
     setupAddToCartInterception();
 }
@@ -246,3 +258,83 @@ if (document.readyState === 'loading') {
 
 window.updateQuantity = updateQuantity;
 window.removeFromCart = removeFromCart;
+
+function renderCartDrawer() {
+    const drawer = document.querySelector('cart-drawer');
+    if (!drawer) return;
+    
+    const emptyState = drawer.querySelector('[id^="CartDrawerEmpty-"]');
+    const bodyState = drawer.querySelector('[id^="CartDrawerBody-"]');
+    const footerState = drawer.querySelector('[id^="CartDrawerFooter-"]');
+    
+    const cart = getCart();
+    
+    if (cart.length === 0) {
+        if (emptyState) {
+            emptyState.classList.remove('hidden');
+            emptyState.style.display = '';
+        }
+        if (bodyState) bodyState.classList.add('hidden');
+        if (footerState) footerState.classList.add('hidden');
+    } else {
+        if (emptyState) {
+            emptyState.classList.add('hidden');
+            emptyState.style.display = 'none';
+        }
+        if (bodyState) {
+            bodyState.classList.remove('hidden');
+            bodyState.style.display = 'flex';
+        }
+        if (footerState) {
+            footerState.classList.remove('hidden');
+            footerState.style.display = 'grid'; // The original CSS uses grid
+        }
+        
+        let html = '';
+        let total = 0;
+        
+        cart.forEach(item => {
+            const lineTotal = item.price * item.quantity;
+            total += lineTotal;
+            
+            html += `
+            <div class="cart-item" style="display: flex; gap: 15px; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px;">
+                <img src="${item.image_url}" alt="${item.name}" style="width: 80px; height: 80px; object-fit: contain; border: 1px solid #ddd; border-radius: 4px;">
+                <div style="flex-grow: 1;">
+                    <h3 style="margin: 0 0 5px 0; font-size: 14px;">${item.name}</h3>
+                    <p style="margin: 0 0 10px 0; font-weight: bold;">€${item.price.toFixed(2)}</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div style="display: inline-flex; border: 1px solid #ddd; border-radius: 4px;">
+                            <button type="button" onclick="updateQuantity('${item.id}', ${item.quantity - 1})" style="padding: 2px 10px; border-right: 1px solid #ddd; background: none; cursor: pointer;">-</button>
+                            <input type="number" value="${item.quantity}" readonly style="width: 30px; text-align: center; border: none; background: none; font-size: 14px;">
+                            <button type="button" onclick="updateQuantity('${item.id}', ${item.quantity + 1})" style="padding: 2px 10px; border-left: 1px solid #ddd; background: none; cursor: pointer;">+</button>
+                        </div>
+                        <button type="button" onclick="removeFromCart('${item.id}')" style="color: #666; cursor: pointer; background: none; border: none; text-decoration: underline; font-size: 12px;">Retirer</button>
+                    </div>
+                </div>
+            </div>
+            `;
+        });
+        
+        const cartItemsContainer = drawer.querySelector('cart-items');
+        if (cartItemsContainer) {
+            cartItemsContainer.innerHTML = html;
+        }
+        
+        // Try to update standard Shopify total element
+        const footerTotals = drawer.querySelector('.totals__subtotal-value');
+        if (footerTotals) {
+            footerTotals.textContent = `€${total.toFixed(2)}`;
+        } else if (footerState) {
+            let ourTotal = document.getElementById('drawer-custom-total');
+            if (!ourTotal) {
+                ourTotal = document.createElement('div');
+                ourTotal.id = 'drawer-custom-total';
+                ourTotal.style.cssText = 'text-align: right; font-size: 20px; font-weight: bold; margin-bottom: 15px;';
+                footerState.prepend(ourTotal);
+            }
+            ourTotal.innerHTML = `Total: €${total.toFixed(2)}`;
+        }
+    }
+}
+
