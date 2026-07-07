@@ -17,6 +17,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const product = await response.json();
         
+        // Export to global scope for cart.js to access
+        window.airtonCurrentProduct = product;
+        window.airtonCurrentProduct.slug = slug;
+        
         // 2. Populate Data in DOM
         
         // Update Titles (assume h1 with class product__title or similar)

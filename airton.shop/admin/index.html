@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
+<!DOCTYPE html><html lang="fr"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Airton - Admin Panel</title>
@@ -58,18 +56,18 @@
                     
                     <div class="form-group">
                         <label for="name">Nom du produit *</label>
-                        <input type="text" id="name" required>
+                        <input type="text" id="name" required="">
                     </div>
 
                     <div class="form-group">
                         <label for="slug">Slug de l'URL (ex: climatiseur-fixe-reversible) *</label>
-                        <input type="text" id="slug" required>
+                        <input type="text" id="slug" required="">
                     </div>
 
                     <div class="form-row">
                         <div class="form-group">
                             <label for="price">Prix régulier (€) *</label>
-                            <input type="number" step="0.01" id="price" required>
+                            <input type="number" step="0.01" id="price" required="">
                         </div>
                         <div class="form-group">
                             <label for="discount_price">Prix remisé (€)</label>
@@ -88,7 +86,7 @@
 
                     <div class="form-group">
                         <label for="features">Spécifications / Caractéristiques (JSON ou Texte)</label>
-                        <textarea id="features" rows="5" placeholder='{"Puissance": "3500W", "Surface": "30m2"}'></textarea>
+                        <textarea id="features" rows="5" placeholder="{&quot;Puissance&quot;: &quot;3500W&quot;, &quot;Surface&quot;: &quot;30m2&quot;}"></textarea>
                     </div>
 
                     <div class="form-actions">
@@ -120,11 +118,11 @@
                 <form id="category-form">
                     <div class="form-group">
                         <label for="cat-name">Nom de la catégorie *</label>
-                        <input type="text" id="cat-name" required>
+                        <input type="text" id="cat-name" required="">
                     </div>
                     <div class="form-group">
                         <label for="cat-slug">Slug de l'URL *</label>
-                        <input type="text" id="cat-slug" required>
+                        <input type="text" id="cat-slug" required="">
                     </div>
                     <div class="form-actions">
                         <button type="button" id="btn-cancel-cat" class="btn btn-secondary">Annuler</button>
@@ -136,5 +134,8 @@
     </div>
 
     <script src="admin.js"></script>
-</body>
-</html>
+
+
+
+<script src="/js/cart.js"></script>
+</body></html>
