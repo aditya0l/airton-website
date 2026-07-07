@@ -1,53 +1,4 @@
-const BACKEND_URL = 'http://localhost:4000';
 
-async function fetchProducts() {
-    try {
-        const response = await fetch(`${BACKEND_URL}/api/product/list`);
-        const data = await response.json();
-        if (data.success) {
-            console.log('Fetched products:', data.products);
-            // Render products in the UI based on Shopify DOM structure if needed
-        }
-    } catch (error) {
-        console.error('Error fetching products:', error);
-    }
-}
-
-function interceptAddToCart() {
-    const forms = document.querySelectorAll('form[action="/cart/add"]');
-    forms.forEach(form => {
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const formData = new FormData(form);
-            const itemId = formData.get('id');
-            const quantity = formData.get('quantity') || 1;
-            
-            console.log(`Intercepted Add to Cart: Item ${itemId}, Quantity ${quantity}`);
-            
-            // Call our custom backend
-            try {
-                const response = await fetch(`${BACKEND_URL}/api/cart/add`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'token': localStorage.getItem('token') || '' // Need token if auth is required
-                    },
-                    body: JSON.stringify({ itemId, size: 'M' }) // Mock size for now
-                });
-                const result = await response.json();
-                console.log('Backend response:', result);
-                if (result.success) {
-                    alert('Added to custom backend cart!');
-                } else {
-                    alert('Error: ' + result.message);
-                }
-            } catch (err) {
-                console.error(err);
-                alert('Failed to connect to backend.');
-            }
-        });
-    });
-}
 
 function interceptExternalLinks() {
     document.addEventListener('click', (e) => {
@@ -119,8 +70,6 @@ function interceptForms() {
 
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Custom API script loaded.');
-    fetchProducts();
-    interceptAddToCart();
     interceptExternalLinks();
     interceptForms();
 });
