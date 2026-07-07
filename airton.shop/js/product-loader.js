@@ -21,6 +21,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         window.airtonCurrentProduct = product;
         window.airtonCurrentProduct.slug = slug;
         
+        // Grab image URL from meta tags if not present in DB
+        if (!window.airtonCurrentProduct.image_url) {
+            const imgMeta = document.querySelector('meta[property="og:image:secure_url"]') || document.querySelector('meta[property="og:image"]');
+            if (imgMeta && imgMeta.content) {
+                window.airtonCurrentProduct.image_url = imgMeta.content;
+            }
+        }
+        
         // 2. Populate Data in DOM
         
         // Update Titles (assume h1 with class product__title or similar)

@@ -141,12 +141,13 @@ function renderCart() {
         cart.forEach(item => {
             const lineTotal = item.price * item.quantity;
             total += lineTotal;
+            const imgSrc = item.image_url || 'https://via.placeholder.com/80?text=Airton';
             
             html += `
             <tr class="cart-item" style="border-bottom: 1px solid #eee; padding-bottom: 15px; margin-bottom: 15px; display: flex; flex-direction: column; md:table-row">
                 <td style="padding: 10px;">
                     <div style="display: flex; gap: 15px; align-items: center;">
-                        <img src="${item.image_url}" alt="${item.name}" style="width: 80px; height: 80px; object-fit: contain; border: 1px solid #ddd; border-radius: 4px;">
+                        <img src="${imgSrc}" alt="${item.name}" style="width: 80px; height: 80px; object-fit: contain; border: 1px solid #ddd; border-radius: 4px;">
                         <div>
                             <h3 style="margin: 0; font-size: 16px;">${item.name}</h3>
                             <p style="margin: 5px 0 0 0; font-weight: bold;">€${item.price.toFixed(2)}</p>
@@ -328,10 +329,11 @@ function renderCartDrawer() {
         cart.forEach(item => {
             const lineTotal = item.price * item.quantity;
             total += lineTotal;
+            const imgSrc = item.image_url || 'https://via.placeholder.com/80?text=Airton';
             
             html += `
             <div class="cart-item" style="display: flex; gap: 15px; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px;">
-                <img src="${item.image_url}" alt="${item.name}" style="width: 80px; height: 80px; object-fit: contain; border: 1px solid #ddd; border-radius: 4px;">
+                <img src="${imgSrc}" alt="${item.name}" style="width: 80px; height: 80px; object-fit: contain; border: 1px solid #ddd; border-radius: 4px;">
                 <div style="flex-grow: 1;">
                     <h3 style="margin: 0 0 5px 0; font-size: 14px;">${item.name}</h3>
                     <p style="margin: 0 0 10px 0; font-weight: bold;">€${item.price.toFixed(2)}</p>
