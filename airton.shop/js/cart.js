@@ -141,7 +141,7 @@ function setupAddToCartInterception() {
                     if (qtyInput) quantity = parseInt(qtyInput.value) || 1;
                 }
                 
-                addToCart(window.airtonCurrentProduct, quantity);
+                addToCart(productToAdd, quantity);
                 
                 // Try to open the cart drawer automatically
                 const cartDrawer = document.querySelector('cart-drawer');
