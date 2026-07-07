@@ -88,7 +88,20 @@ function setupAddToCartInterception() {
             e.preventDefault();
             e.stopPropagation();
             
-            let productToAdd = window.airtonCurrentProduct;
+            let productToAdd = window.airtonCurrentProduct ? {...window.airtonCurrentProduct} : null;
+            
+            if (productToAdd && (atcBtn.classList.contains('configurator-content-footer-add-to-cart') || atcBtn.classList.contains('configurator-sticky-btn'))) {
+                const totalEl = document.querySelector('.configurator-content-footer-total-price-value');
+                if (totalEl) {
+                    const totalStr = totalEl.textContent.replace(/[^0-9,.]/g, '').replace(',', '.');
+                    const total = parseFloat(totalStr);
+                    if (!isNaN(total)) {
+                        productToAdd.id = productToAdd.id + '-config-' + Date.now();
+                        productToAdd.name = productToAdd.name + " (Configuré)";
+                        productToAdd.price = total;
+                    }
+                }
+            }
             
             if (!productToAdd) {
                 // We are likely on a collection page or homepage. Try to extract slug from a product link in the same card.
