@@ -20,7 +20,7 @@ function injectProductLoader(dir) {
             const $ = cheerio.load(content, { decodeEntities: false, recognizeSelfClosing: true });
             
             // Append script to body
-            $('body').append('\n<script src="../js/product-loader.js"></script>\n');
+            $('body').append('\n<script src="/airton.shop/js/product-loader.js"></script>\n');
             
             fs.writeFileSync(fullPath, $.html(), 'utf8');
             console.log('Injected product-loader.js into:', fullPath);
