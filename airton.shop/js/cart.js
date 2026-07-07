@@ -205,7 +205,13 @@ function setupCheckoutButton() {
             
             // Check if user is logged in
             if (localStorage.getItem('user_logged_in') !== 'true') {
-                window.location.href = '/airton.shop/login.html?redirect=' + encodeURIComponent('/airton.shop/cart.html?auto_checkout=1');
+                window.location.href = '/airton.shop/login.html?redirect=' + encodeURIComponent('/airton.shop/cart.html');
+                return;
+            }
+            
+            // If they are not on the cart page, redirect to the cart page first
+            if (!window.location.pathname.includes('cart.html')) {
+                window.location.href = '/airton.shop/cart.html';
                 return;
             }
             
@@ -256,15 +262,6 @@ function initCart() {
     if (typeof renderCartDrawer === 'function') renderCartDrawer();
     setupCheckoutButton();
     setupAddToCartInterception();
-    
-    
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('auto_checkout') === '1' && getCart().length > 0 && localStorage.getItem('user_logged_in') === 'true') {
-        const btn = document.querySelector('[name="checkout"], .cart__checkout-button');
-        if (btn) {
-            setTimeout(() => btn.click(), 500); // slight delay to allow rendering
-        }
-    }
     
     // Restrict shipping calculator countries
     const countrySelects = document.querySelectorAll('select[name="address[country]"]');
