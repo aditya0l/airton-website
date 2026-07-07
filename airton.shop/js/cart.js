@@ -30,7 +30,6 @@ function addToCart(product, quantity = 1) {
     }
     
     saveCart(cart);
-    alert(product.name + " ajouté au panier!");
 }
 
 function removeFromCart(productId) {
