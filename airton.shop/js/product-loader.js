@@ -60,6 +60,34 @@ document.addEventListener('DOMContentLoaded', async () => {
                 stockEl.style.color = 'red';
             }
         });
+        
+        // Re-enable Add to Cart buttons if stock > 0
+        if (product.stock > 0) {
+            document.querySelectorAll('[type="submit"], [name="add"], .configurator-sticky-btn, .product-form__submit, .configurator-content-footer-add-to-cart').forEach(btn => {
+                if (btn.disabled || btn.classList.contains('disabled')) {
+                    btn.disabled = false;
+                    btn.classList.remove('disabled');
+                    
+                    // Update text if it's currently showing "Rupture de stock" or similar
+                    const textSpan = btn.querySelector('.btn__text');
+                    if (textSpan) {
+                        textSpan.textContent = 'Ajouter au panier';
+                    } else if (btn.tagName === 'BUTTON') {
+                        // Some buttons don't have .btn__text spans
+                        if (!btn.querySelector('.spinner')) {
+                            btn.textContent = 'Ajouter au panier';
+                        } else {
+                            // If it has a spinner, only replace the text nodes
+                            for (let i = 0; i < btn.childNodes.length; i++) {
+                                if (btn.childNodes[i].nodeType === Node.TEXT_NODE && btn.childNodes[i].nodeValue.trim() !== '') {
+                                    btn.childNodes[i].nodeValue = 'Ajouter au panier ';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
 
         // Parse features if it's JSON
         if (product.features) {
