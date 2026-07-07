@@ -76,7 +76,15 @@ module.exports = async (req, res) => {
 
         // Create Stripe Checkout Session
         const session = await stripe.checkout.sessions.create({
-            payment_method_types: ['card'],
+            payment_method_types: ['customer_balance'],
+            payment_method_options: {
+                customer_balance: {
+                    funding_type: 'bank_transfer',
+                    bank_transfer: {
+                        type: 'eu_bank_transfer',
+                    },
+                },
+            },
             line_items: lineItems,
             mode: 'payment',
             // Hardcoding URLs relative to the request for success/cancel
