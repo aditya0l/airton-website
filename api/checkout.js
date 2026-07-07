@@ -59,8 +59,12 @@ module.exports = async (req, res) => {
             return res.status(400).json({ error: 'No valid items found' });
         }
 
+        // A customer is REQUIRED by Stripe when using customer_balance (Bank Transfers)
+        const customer = await stripe.customers.create();
+
         // Create Stripe Checkout Session
         const session = await stripe.checkout.sessions.create({
+            customer: customer.id,
             payment_method_types: ['customer_balance'],
             payment_method_options: {
                 customer_balance: {
@@ -83,6 +87,6 @@ module.exports = async (req, res) => {
         res.status(200).json({ url: session.url });
     } catch (err) {
         console.error('Stripe error:', err);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).json({ error: err.message || 'Internal Server Error' });
     }
 };
