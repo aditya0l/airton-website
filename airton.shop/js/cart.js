@@ -82,14 +82,48 @@ function setupAddToCartInterception() {
     }, true);
 
     // Global click interceptor in capture phase to beat any existing frameworks (React/Vue/etc)
-    document.addEventListener('click', (e) => {
+    document.addEventListener('click', async (e) => {
         const atcBtn = e.target.closest('button[name="add"], .product-form__submit, .configurator-sticky-btn, .configurator-useful-card__add, .configurator-content-footer-add-to-cart');
         
         if (atcBtn) {
             e.preventDefault();
             e.stopPropagation();
             
-            if (window.airtonCurrentProduct) {
+            let productToAdd = window.airtonCurrentProduct;
+            
+            if (!productToAdd) {
+                // We are likely on a collection page or homepage. Try to extract slug from a product link in the same card.
+                const card = atcBtn.closest('.grid__item, .product-card-wrapper, li, form, div');
+                let slug = null;
+                if (card) {
+                    const link = card.querySelector('a[href*="products/"]');
+                    if (link) {
+                        const match = link.getAttribute('href').match(/products\/([^.]+)/);
+                        if (match) slug = match[1];
+                    }
+                }
+                
+                if (slug) {
+                    const originalText = atcBtn.textContent;
+                    atcBtn.textContent = '...';
+                    try {
+                        const response = await fetch(`/api/products?slug=${slug}`);
+                        if (response.ok) {
+                            productToAdd = await response.json();
+                            productToAdd.slug = slug;
+                            
+                            // Try to grab an image from the card for the cart thumbnail
+                            const img = card.querySelector('img');
+                            if (img) productToAdd.image_url = img.src || img.getAttribute('data-src') || productToAdd.image_url;
+                        }
+                    } catch (err) {
+                        console.error('Fetch error:', err);
+                    }
+                    atcBtn.textContent = originalText;
+                }
+            }
+            
+            if (productToAdd) {
                 let quantity = 1;
                 const form = atcBtn.closest('form');
                 if (form) {
