@@ -103,7 +103,7 @@ function setupAddToCartInterception() {
         }
     });
     
-    const addButtons = document.querySelectorAll('.configurator-sticky-btn, .configurator-useful-card__add');
+    const addButtons = document.querySelectorAll('.configurator-sticky-btn, .configurator-useful-card__add, .configurator-content-footer-add-to-cart');
     addButtons.forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
