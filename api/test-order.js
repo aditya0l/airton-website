@@ -105,7 +105,17 @@ export default async function handler(req, res) {
                                     </div>
                                 </div>
                                 
-                                <!-- Action Button -->
+                                
+                                ${orderData.order_data?.payment_method === 'card' ? `
+                                <!-- Card Payment Steps -->
+                                <h3 style="font-size: 16px; color: #28a745; margin-bottom: 20px;">Paiement par carte bancaire validé.</h3>
+                                <div style="background: #ffffff; border-radius: 8px; display: table; width: 100%; padding: 20px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+                                    <div style="display: table-cell; text-align: center; vertical-align: middle; padding: 0 10px;">
+                                        <p style="margin: 0; font-size: 13px; font-weight: bold; color: #555;">Votre commande a été réglée avec succès par carte bancaire.</p>
+                                    </div>
+                                </div>
+                                ` : ''}
+<!-- Action Button -->
                                 <a href="mailto:service-client@airton-shop.eu?subject=Demande%20de%20facture%20pour%20la%20commande%20%23${orderData.id}" style="display: inline-block; background-color: #2b8cff; color: #ffffff; text-decoration: none; padding: 14px 30px; border-radius: 30px; font-weight: 600; font-size: 14px; margin-bottom: 20px;">
                                     Demander ma facture
                                 </a>

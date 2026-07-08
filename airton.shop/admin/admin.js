@@ -271,6 +271,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </td>
                     <td>${o.email}</td>
                     <td>${o.total_amount} €</td>
+                    <td>${o.order_data && o.order_data.payment_method === 'bank' ? 'Virement' : (o.order_data && o.order_data.payment_method === 'card' ? 'Carte' : '-')}</td>
                     <td>
                         <span style="padding: 3px 8px; border-radius: 4px; font-size: 0.85rem; color: white; background-color: ${o.status === 'paid' ? 'green' : (o.status === 'pending' ? 'orange' : 'gray')}">
                             ${o.status.toUpperCase()}

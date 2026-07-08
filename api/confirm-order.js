@@ -145,7 +145,17 @@ module.exports = async (req, res) => {
                                     </div>
                                 </div>
                                 
-                                ${(orderData.order_data?.payment_method === 'bank_transfer' || orderData.order_data?.payment_method === 'bank') ? `
+                                
+                                ${orderData.order_data?.payment_method === 'card' ? `
+                                <!-- Card Payment Steps -->
+                                <h3 style="font-size: 16px; color: #28a745; margin-bottom: 20px;">Paiement par carte bancaire validé.</h3>
+                                <div style="background: #ffffff; border-radius: 8px; display: table; width: 100%; padding: 20px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+                                    <div style="display: table-cell; text-align: center; vertical-align: middle; padding: 0 10px;">
+                                        <p style="margin: 0; font-size: 13px; font-weight: bold; color: #555;">Votre commande a été réglée avec succès par carte bancaire.</p>
+                                    </div>
+                                </div>
+                                ` : ''}
+${(orderData.order_data?.payment_method === 'bank_transfer' || orderData.order_data?.payment_method === 'bank') ? `
                                 <!-- Bank Transfer Steps -->
                                 <h3 style="font-size: 16px; color: #016FD0; margin-bottom: 20px;">Si vous payez par virement bancaire.</h3>
                                 <div style="background: #ffffff; border-radius: 8px; display: table; width: 100%; padding: 20px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
