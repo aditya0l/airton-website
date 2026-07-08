@@ -1343,6 +1343,24 @@
             btn.textContent = 'Traitement...';
             btn.disabled = true;
 
+            // Update draft order with actual details before proceeding to payment
+            try {
+                await fetch('/api/bank-transfer', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        items: getFullItemsList(JSON.parse(localStorage.getItem('airton_cart') || '[]')),
+                        orderId: window.currentOrderId,
+                        orderData: { 
+                            email, firstName, lastName, address, city, zipcode, 
+                            country: document.getElementById('country').value,
+                            phone: document.getElementById('phone').value,
+                            payment_method: currentPaymentMethod
+                        }
+                    })
+                });
+            } catch(e) { console.error('Failed to update draft order', e); }
+
             if (currentPaymentMethod === 'card') {
                 // STRIPE PAYMENT
                 if (!stripe || !elements) {
@@ -1351,24 +1369,6 @@
                     btn.disabled = false;
                     return;
                 }
-
-                // Update draft order with actual details before Stripe confirms
-                try {
-                    await fetch('/api/bank-transfer', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            items: getFullItemsList(JSON.parse(localStorage.getItem('airton_cart') || '[]')),
-                            orderId: window.currentOrderId,
-                            orderData: { 
-                                email, firstName, lastName, address, city, zipcode, 
-                                country: document.getElementById('country').value,
-                                phone: document.getElementById('phone').value,
-                                payment_method: 'card'
-                            }
-                        })
-                    });
-                } catch(e) { console.error('Failed to update draft order prior to Stripe confirm', e); }
 
                 const returnUrl = window.location.origin + '/airton.shop/checkout-success.html';
 
