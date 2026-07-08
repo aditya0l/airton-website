@@ -82,47 +82,101 @@ module.exports = async (req, res) => {
                             to: orderData.email,
                             subject: 'Confirmation de votre commande Airton',
                             html: `
-                                <div style="font-family: 'Helvetica Neue', Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden;">
-                                    <!-- Header -->
-                                    <div style="background-color: #016FD0; padding: 30px; text-align: center;">
-                                        <h1 style="color: #ffffff; margin: 0; font-size: 24px; letter-spacing: 1px;">MERCI POUR VOTRE COMMANDE !</h1>
-                                    </div>
-                                    
-                                    <!-- Body -->
-                                    <div style="padding: 40px 30px; color: #333333;">
-                                        <h2 style="font-size: 20px; color: #016FD0; margin-top: 0;">Bonjour ${orderData.first_name || 'Client'},</h2>
-                                        <p style="font-size: 16px; line-height: 1.5; margin-bottom: 25px;">
-                                            Nous sommes ravis de vous confirmer que votre paiement a été validé avec succès. Notre équipe prépare actuellement votre commande pour l'expédition avec le plus grand soin.
-                                        </p>
-                                        
-                                        <!-- Order Details Box -->
-                                        <div style="background-color: #f8f9fa; border-left: 4px solid #016FD0; padding: 20px; margin-bottom: 30px; border-radius: 4px;">
-                                            <h3 style="margin-top: 0; font-size: 16px; color: #333333;">Détails de la commande (#${orderData.id})</h3>
-                                            <table style="width: 100%; border-collapse: collapse;">
-                                                <tr>
-                                                    <td style="padding: 8px 0; color: #555555; border-bottom: 1px solid #eeeeee;"><strong>Date :</strong></td>
-                                                    <td style="padding: 8px 0; text-align: right; color: #333333; border-bottom: 1px solid #eeeeee;">${new Date(orderData.created_at).toLocaleDateString('fr-FR')}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="padding: 8px 0; color: #555555;"><strong>Montant Total :</strong></td>
-                                                    <td style="padding: 8px 0; text-align: right; font-size: 18px; font-weight: bold; color: #016FD0;">${Number(orderData.total_amount).toFixed(2).replace('.', ',')} €</td>
-                                                </tr>
-                                            </table>
+                        <div style="font-family: 'Helvetica Neue', Arial, sans-serif; background: linear-gradient(135deg, #faebd7 0%, #e0f7fa 100%); padding: 40px 20px; color: #111;">
+                            <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+                                
+                                <!-- Logo -->
+                                <h1 style="font-size: 24px; font-weight: 800; letter-spacing: 2px; margin-bottom: 20px;">AÏRTON</h1>
+                                
+                                <!-- Header -->
+                                <h2 style="font-size: 24px; font-weight: bold; margin-bottom: 10px;">Votre commande est confirmée !</h2>
+                                <p style="font-size: 13px; color: #555; margin-bottom: 30px; line-height: 1.5;">
+                                    Si vous constatez une erreur dans votre commande,<br>
+                                    contactez nous à l'adresse : <a href="mailto:service-client@airton.shop" style="color: #016FD0; text-decoration: none;">service-client@airton.shop</a>
+                                </p>
+                                
+                                <h3 style="font-size: 18px; margin-bottom: 5px;">Détail de votre commande.</h3>
+                                <p style="font-size: 16px; margin-bottom: 25px; font-weight: bold;">Commande <span style="color: #016FD0;">#${orderData.id}</span>.</p>
+                                
+                                <!-- Order Items Card -->
+                                <div style="background-color: #ffffff; border-radius: 8px; padding: 25px; margin-bottom: 30px; text-align: left; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+                                    ${orderData.items ? orderData.items.map(item => `
+                                    <div style="display: table; width: 100%; margin-bottom: 15px; border-bottom: 1px solid #f0f0f0; padding-bottom: 15px;">
+                                        <div style="display: table-cell; vertical-align: middle; width: 60px;">
+                                            <div style="width: 50px; height: 50px; background: #f8f9fa; border: 1px solid #eaeaea; border-radius: 4px;"></div>
                                         </div>
-                                        
-                                        <p style="font-size: 16px; line-height: 1.5;">
-                                            Vous recevrez un nouvel e-mail avec les informations de suivi dès que votre colis quittera notre entrepôt.
-                                        </p>
+                                        <div style="display: table-cell; vertical-align: middle; padding-left: 15px; font-size: 13px;">
+                                            ${item.title || item.name}
+                                        </div>
+                                        <div style="display: table-cell; vertical-align: middle; text-align: right; font-size: 13px; color: #777; width: 40px;">
+                                            x${item.quantity}
+                                        </div>
+                                        <div style="display: table-cell; vertical-align: middle; text-align: right; font-size: 13px; font-weight: 500; width: 80px;">
+                                            ${Number(item.price).toFixed(2).replace('.', ',')}€
+                                        </div>
                                     </div>
+                                    `).join('') : '<p>Articles non disponibles</p>'}
                                     
-                                    <!-- Footer -->
-                                    <div style="background-color: #f4f4f4; padding: 20px; text-align: center; color: #888888; font-size: 14px;">
-                                        <p style="margin: 0 0 10px 0;">Besoin d'aide ? N'hésitez pas à nous contacter.</p>
-                                        <a href="mailto:service-client@airton-shop.eu" style="color: #016FD0; text-decoration: none; font-weight: bold;">service-client@airton-shop.eu</a>
-                                        <p style="margin: 15px 0 0 0; font-size: 12px;">© ${new Date().getFullYear()} Airton. Tous droits réservés.</p>
+                                    <div style="display: table; width: 100%; padding-top: 10px;">
+                                        <div style="display: table-cell; vertical-align: middle; font-size: 13px; color: #555;">Code promo :</div>
+                                        <div style="display: table-cell; vertical-align: middle; text-align: right; font-size: 20px; font-weight: bold;">
+                                            ${Number(orderData.total_amount).toFixed(2).replace('.', ',')}€
+                                        </div>
                                     </div>
                                 </div>
-                            `
+                                
+                                <!-- Action Button -->
+                                <a href="#" style="display: inline-block; background-color: #2b8cff; color: #ffffff; text-decoration: none; padding: 14px 30px; border-radius: 30px; font-weight: 600; font-size: 14px; margin-bottom: 20px;">
+                                    Télécharger ma facture
+                                </a>
+                                
+                                <!-- Dashed separator -->
+                                <div style="height: 30px; border-left: 1px dashed #999; width: 1px; margin: 0 auto 20px auto;"></div>
+                                
+                                <!-- Addresses -->
+                                <div style="display: table; width: 100%; margin-bottom: 30px;">
+                                    <div style="display: table-cell; width: 48%; background: #ffffff; border-radius: 8px; padding: 20px; text-align: left; vertical-align: top; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+                                        <h4 style="margin: 0 0 10px 0; font-size: 14px;">Adresse de facturation</h4>
+                                        <p style="margin: 0; font-size: 12px; color: #555; line-height: 1.5;">
+                                            ${orderData.first_name || ''} ${orderData.last_name || ''}<br>
+                                            ${orderData.order_data?.phone || ''}<br>
+                                            <a href="mailto:${orderData.email}" style="color: #016FD0; text-decoration: none;">${orderData.email}</a><br>
+                                            ${orderData.order_data?.city || ''}, ${orderData.order_data?.country || ''}<br>
+                                            ${orderData.order_data?.zipcode || ''}, ${orderData.order_data?.city || ''}
+                                        </p>
+                                    </div>
+                                    <div style="display: table-cell; width: 4%;"></div>
+                                    <div style="display: table-cell; width: 48%; background: #ffffff; border-radius: 8px; padding: 20px; text-align: left; vertical-align: top; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+                                        <h4 style="margin: 0 0 10px 0; font-size: 14px;">Adresse de livraison</h4>
+                                        <p style="margin: 0; font-size: 12px; color: #555; line-height: 1.5;">
+                                            ${orderData.first_name || ''} ${orderData.last_name || ''}<br>
+                                            ${orderData.order_data?.phone || ''}<br>
+                                            <a href="mailto:${orderData.email}" style="color: #016FD0; text-decoration: none;">${orderData.email}</a><br>
+                                            ${orderData.order_data?.city || ''}, ${orderData.order_data?.country || ''}<br>
+                                            ${orderData.order_data?.zipcode || ''}, ${orderData.order_data?.city || ''}
+                                        </p>
+                                    </div>
+                                </div>
+                                
+                                ${orderData.order_data?.payment_method === 'bank_transfer' ? `
+                                <!-- Bank Transfer Steps -->
+                                <h3 style="font-size: 16px; color: #016FD0; margin-bottom: 20px;">Si vous payez par virement bancaire.</h3>
+                                <div style="background: #ffffff; border-radius: 8px; display: table; width: 100%; padding: 20px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+                                    <div style="display: table-cell; width: 33%; text-align: center; border-right: 1px solid #e0e0e0; vertical-align: middle; padding: 0 10px;">
+                                        <p style="margin: 0; font-size: 11px; font-weight: bold;">Téléchargez<br>notre RIB <a href="#" style="color: #016FD0; text-decoration: none;">ici</a></p>
+                                    </div>
+                                    <div style="display: table-cell; width: 33%; text-align: center; border-right: 1px solid #e0e0e0; vertical-align: middle; padding: 0 10px;">
+                                        <p style="margin: 0; font-size: 11px; font-weight: bold;">Faire le virement<br>avec la référence <span style="color: #016FD0;">#${orderData.id}</span></p>
+                                    </div>
+                                    <div style="display: table-cell; width: 33%; text-align: center; vertical-align: middle; padding: 0 10px;">
+                                        <p style="margin: 0; font-size: 11px; font-weight: bold;">Envoyer le justificatif<br>à <a href="mailto:info@airton.shop" style="color: #016FD0; text-decoration: none;">info@airton.shop</a></p>
+                                    </div>
+                                </div>
+                                ` : ''}
+                                
+                            </div>
+                        </div>
+                    `
                         };
 
                         await transporter.sendMail(mailOptions);
