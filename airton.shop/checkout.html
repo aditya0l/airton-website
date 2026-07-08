@@ -234,23 +234,23 @@
     <h3 style="font-size: 1.1rem; margin-bottom: 15px;">Complétez votre installation en 1 clic</h3>
     <div style="display: flex; gap: 15px;">
         <div style="flex: 1; border: 1px solid #ddd; padding: 15px; border-radius: 8px; background: white; display: flex; flex-direction: column;">
-            <img src="https://airton.shop/cdn/shop/files/AIRSTORM-WIFI.png?v=1719299498" style="width: 100%; height: 100px; object-fit: contain; margin-bottom: 10px;">
+            <img src="https://airton.shop/cdn/shop/files/multi_wi-fi.png?v=1776764816" style="width: 100%; height: 100px; object-fit: contain; margin-bottom: 10px;">
             <p style="font-weight: bold; font-size: 0.9rem; margin: 0 0 5px 0;">Clé Wifi Airton</p>
             <p style="color: #555; margin: 0 0 10px 0;">99,90 €</p>
             <select id="cs1_model" style="margin-bottom: 10px; padding: 5px;"><option value="Monosplit">Modèle Monosplit</option></select>
             <div style="display: flex; gap: 10px; margin-top: auto;">
                 <input type="number" id="cs1_qty" value="1" min="1" style="width: 60px; padding: 5px;">
-                <button type="button" onclick="addCrossSell('Clé Wifi Airton', 99.90, 'https://airton.shop/cdn/shop/files/AIRSTORM-WIFI.png?v=1719299498', 'cs1_qty')" class="btn-submit" style="margin-top: 0; padding: 5px 10px; font-size: 0.9rem;">Ajouter</button>
+                <button type="button" onclick="addCrossSell('Clé Wifi Airton', 99.90, 'https://airton.shop/cdn/shop/files/multi_wi-fi.png?v=1776764816', 'cs1_qty')" class="btn-submit" style="margin-top: 0; padding: 5px 10px; font-size: 0.9rem;">Ajouter</button>
             </div>
         </div>
         <div style="flex: 1; border: 1px solid #ddd; padding: 15px; border-radius: 8px; background: white; display: flex; flex-direction: column;">
-            <img src="https://airton.shop/cdn/shop/products/0e5b721e-d456-42b7-bdc6-7de85e499d3e.jpg?v=1667926839" style="width: 100%; height: 100px; object-fit: contain; margin-bottom: 10px;">
+            <img src="https://airton.shop/cdn/shop/products/bande-isolante-10m-blanc-clim-409801.png?v=1629304674" style="width: 100%; height: 100px; object-fit: contain; margin-bottom: 10px;">
             <p style="font-weight: bold; font-size: 0.9rem; margin: 0 0 5px 0;">Bande isolante blanche</p>
             <p style="color: #555; margin: 0 0 10px 0;">9,90 €</p>
             <select id="cs2_model" style="margin-bottom: 10px; padding: 5px;"><option value="10m">10m</option></select>
             <div style="display: flex; gap: 10px; margin-top: auto;">
                 <input type="number" id="cs2_qty" value="1" min="1" style="width: 60px; padding: 5px;">
-                <button type="button" onclick="addCrossSell('Bande isolante', 9.90, 'https://airton.shop/cdn/shop/products/0e5b721e-d456-42b7-bdc6-7de85e499d3e.jpg?v=1667926839', 'cs2_qty')" class="btn-submit" style="margin-top: 0; padding: 5px 10px; font-size: 0.9rem;">Ajouter</button>
+                <button type="button" onclick="addCrossSell('Bande isolante', 9.90, 'https://airton.shop/cdn/shop/products/bande-isolante-10m-blanc-clim-409801.png?v=1629304674', 'cs2_qty')" class="btn-submit" style="margin-top: 0; padding: 5px 10px; font-size: 0.9rem;">Ajouter</button>
             </div>
         </div>
     </div>
@@ -465,6 +465,25 @@
             
             const items = getFullItemsList();
             
+            const orderData = {
+                email: email,
+                firstName: firstName,
+                lastName: lastName,
+                address: address,
+                city: city,
+                zipcode: zipcode,
+                country: document.getElementById('country').value,
+                phone: document.getElementById('phone').value,
+                billingSameAsDelivery: document.getElementById('billing_same').checked,
+                billingAddress: document.getElementById('billing_diff').checked ? {
+                    firstName: document.getElementById('b_firstName').value,
+                    lastName: document.getElementById('b_lastName').value,
+                    address: document.getElementById('b_address').value,
+                    city: document.getElementById('b_city').value,
+                    zipcode: document.getElementById('b_zipcode').value
+                } : null
+            };
+            
             const btn = document.getElementById('payButton');
             btn.textContent = 'Traitement...';
             btn.disabled = true;
@@ -473,7 +492,7 @@
                 const response = await fetch('/api/checkout', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ items: items })
+                    body: JSON.stringify({ items: items, orderData: orderData })
                 });
                 
                 const data = await response.json();

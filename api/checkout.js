@@ -28,7 +28,7 @@ module.exports = async (req, res) => {
     }
 
     try {
-        const { items } = req.body; // Array of { id, quantity }
+        const { items, orderData } = req.body; // Array of { id, quantity } and order details
 
         if (!items || items.length === 0) {
             return res.status(400).json({ error: 'Cart is empty' });
@@ -58,6 +58,8 @@ module.exports = async (req, res) => {
         }
 
         const taxAmount = subtotal * 0.166;
+        const totalAmount = subtotal + taxAmount;
+        
         lineItems.push({
             price_data: {
                 currency: 'eur',
@@ -73,14 +75,42 @@ module.exports = async (req, res) => {
             return res.status(400).json({ error: 'No valid items found' });
         }
 
+        // Save to Supabase
+        let orderId = null;
+        if (orderData) {
+            const { data, error } = await supabase
+                .from('orders')
+                .insert([{
+                    email: orderData.email,
+                    first_name: orderData.firstName,
+                    last_name: orderData.lastName,
+                    total_amount: totalAmount,
+                    status: 'pending',
+                    order_data: orderData,
+                    items: items
+                }])
+                .select();
+                
+            if (error) {
+                console.error('Supabase insert error:', error);
+                // We could still proceed to Stripe even if DB fails, or fail early. Proceeding is safer for revenue.
+            } else if (data && data.length > 0) {
+                orderId = data[0].id;
+            }
+        }
+
         // A customer is REQUIRED by Stripe when using customer_balance (Bank Transfers)
-        const customer = await stripe.customers.create();
+        const customer = await stripe.customers.create({
+            email: orderData ? orderData.email : undefined,
+            name: orderData ? `${orderData.firstName} ${orderData.lastName}` : undefined
+        });
 
         // Create Stripe Checkout Session
         const session = await stripe.checkout.sessions.create({
             customer: customer.id,
             line_items: lineItems,
             mode: 'payment',
+            client_reference_id: orderId ? orderId.toString() : undefined,
             // Hardcoding URLs relative to the request for success/cancel
             success_url: `https://${req.headers.host || 'airton.shop'}/airton.shop/checkout-success.html`,
             cancel_url: `https://${req.headers.host || 'airton.shop'}/airton.shop/cart.html`,
