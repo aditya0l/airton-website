@@ -86,7 +86,7 @@ module.exports = async (req, res) => {
                             <div style="max-width: 600px; margin: 0 auto; text-align: center;">
                                 
                                 <!-- Logo -->
-                                <h1 style="font-size: 24px; font-weight: 800; letter-spacing: 2px; margin-bottom: 20px;">AÏRTON</h1>
+                                <img src="https://airton.shop/cdn/shop/files/Logo_Airton_2025_Noir_2.svg" alt="Airton" style="height: 35px; margin-bottom: 20px;">
                                 
                                 <!-- Header -->
                                 <h2 style="font-size: 24px; font-weight: bold; margin-bottom: 10px;">Votre commande est confirmée !</h2>
