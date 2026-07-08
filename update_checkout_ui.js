@@ -1,189 +1,15 @@
-<!DOCTYPE html><html lang="fr"><head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paiement - Airton</title>
-    <style>
-        body {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
-            color: #333;
-        }
-        .checkout-header {
-            background: white;
-            padding: 20px;
-            text-align: center;
-            border-bottom: 1px solid #ddd;
-        }
-        .checkout-header img {
-            height: 40px;
-        }
-        .checkout-container {
-            display: flex;
-            flex-direction: column;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            gap: 40px;
-        }
-        @media(min-width: 768px) {
-            .checkout-container {
-                flex-direction: row;
-            }
-        }
-        .checkout-left, .checkout-right {
-            flex: 1;
-        }
-        .checkout-left {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-        .checkout-right {
-            background: #fafafa;
-            padding: 30px;
-            border-radius: 8px;
-            border: 1px solid #eee;
-        }
-        h2 {
-            font-size: 1.25rem;
-            margin-top: 0;
-            margin-bottom: 20px;
-            font-weight: 500;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-row {
-            display: flex;
-            gap: 15px;
-        }
-        .form-row .form-group {
-            flex: 1;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-size: 0.875rem;
-            color: #555;
-        }
-        input, select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
-            font-size: 1rem;
-        }
-        input:focus, select:focus {
-            outline: none;
-            border-color: #000;
-        }
-        .btn-submit {
-            background-color: #000;
-            color: white;
-            border: none;
-            padding: 15px 20px;
-            font-size: 1rem;
-            border-radius: 4px;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 20px;
-            font-weight: bold;
-            transition: background 0.3s;
-        }
-        .btn-submit:hover {
-            background-color: #333;
-        }
-        .cart-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            gap: 15px;
-        }
-        .cart-item img {
-            width: 64px;
-            height: 64px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            object-fit: cover;
-        }
-        .cart-item-details {
-            flex: 1;
-        }
-        .cart-item-title {
-            font-weight: bold;
-            font-size: 0.9rem;
-            margin: 0 0 5px 0;
-        }
-        .cart-item-price {
-            color: #555;
-            font-size: 0.9rem;
-        }
-        .cart-total {
-            border-top: 1px solid #ddd;
-            margin-top: 20px;
-            padding-top: 20px;
-            display: flex;
-            justify-content: space-between;
-            font-weight: bold;
-            font-size: 1.25rem;
-        }
-    </style>
-</head>
-<body>
-    <header class="checkout-header">
-        <a href="/">
-            <img src="https://airton.shop/cdn/shop/files/Logo_Airton_2025_Noir_2.svg" alt="Airton">
-        </a>
-    </header>
+const fs = require('fs');
+const cheerio = require('cheerio');
 
-    <div class="checkout-container">
-        <!-- Left: Form -->
-        <div class="checkout-left">
-            <h2>Contact</h2>
-            <div class="form-group">
-                <input type="email" id="email" placeholder="Adresse e-mail" required="">
-            </div>
-            <div class="form-group">
-                <input type="tel" id="phone" placeholder="Téléphone" required="">
-            </div>
+let html = fs.readFileSync('airton.shop/checkout.html', 'utf8');
+const $ = cheerio.load(html, { decodeEntities: false });
 
-            <h2 style="margin-top: 40px;">Adresse de livraison</h2>
-            <div class="form-row">
-                <div class="form-group">
-                    <input type="text" id="firstName" placeholder="Prénom" required="">
-                </div>
-                <div class="form-group">
-                    <input type="text" id="lastName" placeholder="Nom" required="">
-                </div>
-            </div>
-            <div class="form-group">
-                <input type="text" id="address" placeholder="Adresse (ex: 12 rue de la Paix)" required="">
-            </div>
-            <div class="form-row">
-                <div class="form-group">
-                    <input type="text" id="zipcode" placeholder="Code postal" required="">
-                </div>
-                <div class="form-group">
-                    <input type="text" id="city" placeholder="Ville" required="">
-                </div>
-            </div>
-            <div class="form-group">
-                <select id="country">
-                    <option value="France">France</option>
-                    <option value="Monaco">Monaco</option>
-                    <option value="Belgique">Belgique</option>
-                    <option value="Luxembourg">Luxembourg</option>
-                    <option value="Suisse">Suisse</option>
-                </select>
-            </div>
+// 1. Add Billing Address UI after Delivery Address block
+const billingHtml = `
 <h2 style="margin-top: 40px;">Adresse de facturation</h2>
 <div class="form-group" style="border: 1px solid #ddd; border-radius: 4px; padding: 15px;">
     <div style="margin-bottom: 10px;">
-        <input type="radio" name="billing" id="billing_same" value="same" checked="" style="width: auto;">
+        <input type="radio" name="billing" id="billing_same" value="same" checked style="width: auto;">
         <label for="billing_same" style="display: inline; margin-left: 5px;">Identique à l'adresse de livraison</label>
     </div>
     <div>
@@ -202,34 +28,25 @@
         <div class="form-group"><input type="text" id="b_city" placeholder="Ville"></div>
     </div>
 </div>
+`;
 
+// Insert after the country select group
+if ($('#billingFields').length === 0) {
+    $('#country').parent().after(billingHtml);
+}
 
-            
+// 2. Add Upsell UI above CGV
+const upsellHtml = `
 <div id="dynamicUpsells" style="margin-top: 40px; margin-bottom: 20px;">
     <!-- Rendered via JS -->
 </div>
-<div style="margin-top: 20px; margin-bottom: 15px; display: flex; align-items: flex-start; gap: 10px; font-size: 0.9rem;">
-                <input type="checkbox" id="cgv" required="" style="width: auto; margin-top: 3px;">
-                <label for="cgv" style="display: inline; margin: 0;">J'ai lu et j'accepte les <a href="/policies/terms-of-service" style="color: #0066cc;">Conditions Générales de Vente (CGV)</a>.</label>
-            </div>
-            <button class="btn-submit" id="payButton">Valider le paiement</button>
-        </div>
+`;
+if ($('#dynamicUpsells').length === 0) {
+    $('#cgv').parent().before(upsellHtml);
+}
 
-        <!-- Right: Order Summary -->
-        <div class="checkout-right">
-            <h2>Résumé de la commande</h2>
-            <div id="checkoutCartItems">
-                <!-- Items populated via JS -->
-            </div>
-            <div class="cart-total" style="border-top: none; padding-top: 5px; margin-top: 5px; font-size: 1rem; font-weight: normal; color: #555;">
-                <span>Taxes (16.6%)</span>
-                <span id="checkoutTax">0,00 €</span>
-            </div>
-            <div class="cart-total">
-                <span>Total</span>
-                <span id="checkoutTotal">0,00 €</span>
-            </div>
-        
+// 3. Add Cross-sell UI below Total in right column
+const crosssellHtml = `
 <div style="margin-top: 40px;">
     <h3 style="font-size: 1.1rem; margin-bottom: 15px;">Complétez votre installation en 1 clic</h3>
     <div style="display: flex; gap: 15px;">
@@ -255,11 +72,13 @@
         </div>
     </div>
 </div>
-</div>
-    </div>
+`;
+if ($('h3:contains("Complétez")').length === 0) {
+    $('.checkout-right').append(crosssellHtml);
+}
 
-    <script src="/airton.shop/custom-api.js"></script>
-    <script>
+// 4. Update the script block with the massive new logic
+const newScript = `
         const upsellPricing = {
             'Monosplit': { maint: 199.00, warranty: 59.90, serenity: 249.00 },
             'Bisplit': { maint: 349.00, warranty: 89.90, serenity: 429.00 },
@@ -301,38 +120,38 @@
 
         function renderUpsellUI() {
             const prices = upsellPricing[currentSystemType];
-            const html = `
+            const html = \`
                 <div style="border: 1px solid #ddd; padding: 15px; border-radius: 8px; margin-bottom: 10px; background: white; display: flex; justify-content: space-between; align-items: center;">
                     <div>
                         <p style="margin:0; font-weight: bold; font-size:0.95rem;">Évitez les pannes</p>
-                        <p style="margin:5px 0 0 0; color:#555; font-size:0.85rem;">Contrat d'entretien annuel pour ${currentSystemType}</p>
-                        <p style="margin:5px 0 0 0; font-weight: bold;">${prices.maint.toFixed(2).replace('.',',')} €</p>
+                        <p style="margin:5px 0 0 0; color:#555; font-size:0.85rem;">Contrat d'entretien annuel pour \${currentSystemType}</p>
+                        <p style="margin:5px 0 0 0; font-weight: bold;">\${prices.maint.toFixed(2).replace('.',',')} €</p>
                     </div>
                     <div>
-                        <input type="checkbox" onchange="toggleUpsell('maint')" ${activeUpsells.maint ? 'checked' : ''} style="width: 20px; height: 20px;">
+                        <input type="checkbox" onchange="toggleUpsell('maint')" \${activeUpsells.maint ? 'checked' : ''} style="width: 20px; height: 20px;">
                     </div>
                 </div>
                 <div style="border: 1px solid #ddd; padding: 15px; border-radius: 8px; margin-bottom: 10px; background: white; display: flex; justify-content: space-between; align-items: center;">
                     <div>
                         <p style="margin:0; font-weight: bold; font-size:0.95rem;">Couvrez l'imprévu</p>
-                        <p style="margin:5px 0 0 0; color:#555; font-size:0.85rem;">Garantie Premium Annuelle pour ${currentSystemType}</p>
-                        <p style="margin:5px 0 0 0; font-weight: bold;">${prices.warranty.toFixed(2).replace('.',',')} €</p>
+                        <p style="margin:5px 0 0 0; color:#555; font-size:0.85rem;">Garantie Premium Annuelle pour \${currentSystemType}</p>
+                        <p style="margin:5px 0 0 0; font-weight: bold;">\${prices.warranty.toFixed(2).replace('.',',')} €</p>
                     </div>
                     <div>
-                        <input type="checkbox" onchange="toggleUpsell('warranty')" ${activeUpsells.warranty ? 'checked' : ''} style="width: 20px; height: 20px;">
+                        <input type="checkbox" onchange="toggleUpsell('warranty')" \${activeUpsells.warranty ? 'checked' : ''} style="width: 20px; height: 20px;">
                     </div>
                 </div>
                 <div style="border: 1px solid #ddd; padding: 15px; border-radius: 8px; margin-bottom: 10px; background: white; display: flex; justify-content: space-between; align-items: center;">
                     <div>
                         <p style="margin:0; font-weight: bold; font-size:0.95rem;">L'option tout-en-un</p>
-                        <p style="margin:5px 0 0 0; color:#555; font-size:0.85rem;">Pack Sérénité pour ${currentSystemType}</p>
-                        <p style="margin:5px 0 0 0; font-weight: bold;">${prices.serenity.toFixed(2).replace('.',',')} €</p>
+                        <p style="margin:5px 0 0 0; color:#555; font-size:0.85rem;">Pack Sérénité pour \${currentSystemType}</p>
+                        <p style="margin:5px 0 0 0; font-weight: bold;">\${prices.serenity.toFixed(2).replace('.',',')} €</p>
                     </div>
                     <div>
-                        <input type="checkbox" onchange="toggleUpsell('serenity')" ${activeUpsells.serenity ? 'checked' : ''} style="width: 20px; height: 20px;">
+                        <input type="checkbox" onchange="toggleUpsell('serenity')" \${activeUpsells.serenity ? 'checked' : ''} style="width: 20px; height: 20px;">
                     </div>
                 </div>
-            `;
+            \`;
             document.getElementById('dynamicUpsells').innerHTML = html;
         }
 
@@ -404,15 +223,15 @@
             let subtotal = 0;
             container.innerHTML = fullItems.map(item => {
                 subtotal += item.price * item.quantity;
-                return `
+                return \`
                     <div class="cart-item">
-                        <img src="${item.image_url || 'https://via.placeholder.com/64'}" alt="${item.name}">
+                        <img src="\${item.image_url || 'https://via.placeholder.com/64'}" alt="\${item.name}">
                         <div class="cart-item-details">
-                            <p class="cart-item-title">${item.name}</p>
-                            <span class="cart-item-price">${item.quantity} x ${item.price.toFixed(2).replace('.',',')} €</span>
+                            <p class="cart-item-title">\${item.name}</p>
+                            <span class="cart-item-price">\${item.quantity} x \${item.price.toFixed(2).replace('.',',')} €</span>
                         </div>
                     </div>
-                `;
+                \`;
             }).join('');
             
             const tax = subtotal * 0.166;
@@ -490,6 +309,9 @@
                 btn.disabled = false;
             }
         });
-</script>
+`;
 
-</body></html>
+$('script:not([src])').text(newScript);
+
+fs.writeFileSync('airton.shop/checkout.html', $.html(), 'utf8');
+console.log('Update complete');
