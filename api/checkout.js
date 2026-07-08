@@ -57,21 +57,9 @@ module.exports = async (req, res) => {
             });
         }
 
-        const taxAmount = subtotal * 0.166;
-        const totalAmount = subtotal + taxAmount;
-        
-        lineItems.push({
-            price_data: {
-                currency: 'eur',
-                product_data: {
-                    name: 'Taxes (16.6%)',
-                },
-                unit_amount: Math.round(taxAmount * 100),
-            },
-            quantity: 1,
-        });
+        const totalAmount = subtotal;
 
-        if (lineItems.length <= 1) { // Only tax item means no valid products
+        if (lineItems.length === 0) {
             return res.status(400).json({ error: 'No valid items found' });
         }
 
