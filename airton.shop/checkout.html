@@ -560,7 +560,11 @@
                     console.error("Stripe Publishable Key not found");
                 }
             } catch (err) {
-                console.error("Failed         let currentPaymentMethod = 'card';
+                console.error("Failed to initialize Stripe:", err);
+            }
+        });
+
+        let currentPaymentMethod = 'card';
         function selectPayment(method) {
             currentPaymentMethod = method;
             document.getElementById('radio-card').checked = (method === 'card');
