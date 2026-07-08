@@ -282,7 +282,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             document.querySelectorAll('.btn-confirm-order').forEach(btn => {
                 btn.addEventListener('click', (e) => {
-                    if (confirm('Confirmer le paiement et envoyer l\\'email au client ?')) {
+                    if (confirm("Confirmer le paiement et envoyer l'email au client ?")) {
                         confirmOrder(e.target.getAttribute('data-id'));
                     }
                 });
