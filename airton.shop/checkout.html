@@ -519,6 +519,71 @@
                 btn.disabled = false;
             }
         });
+
+        // Show Bank Transfer Details
+        document.getElementById('bankTransferBtn').addEventListener('click', () => {
+            document.getElementById('payButton').style.display = 'none';
+            document.getElementById('bankTransferBtn').style.display = 'none';
+            document.getElementById('bankTransferDetails').style.display = 'block';
+        });
+
+        // Handle Bank Transfer Submit
+        document.getElementById('confirmBankTransferBtn').addEventListener('click', async () => {
+            const email = document.getElementById('email').value;
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const address = document.getElementById('address').value;
+            const city = document.getElementById('city').value;
+            const zipcode = document.getElementById('zipcode').value;
+            const cgv = document.getElementById('cgv').checked;
+            const bankReference = document.getElementById('bankReference').value;
+            
+            if (!email || !firstName || !lastName || !address || !city || !zipcode || !bankReference) {
+                alert('Veuillez remplir tous les champs obligatoires, y compris la référence du virement.');
+                return;
+            }
+            if (!cgv) {
+                alert('Veuillez accepter les CGV.');
+                return;
+            }
+            
+            const btn = document.getElementById('confirmBankTransferBtn');
+            btn.disabled = true;
+            btn.textContent = 'Traitement en cours...';
+            
+            const cartItems = JSON.parse(localStorage.getItem('airton_cart') || '[]');
+            const fullItems = getFullItemsList(cartItems);
+            
+            try {
+                const response = await fetch('/api/bank-transfer', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        items: fullItems,
+                        orderData: { 
+                            email, firstName, lastName, address, city, zipcode, 
+                            payment_method: 'bank_transfer',
+                            bank_reference: bankReference
+                        }
+                    })
+                });
+                
+                const data = await response.json();
+                if (!response.ok) {
+                    throw new Error(data.error || 'Une erreur est survenue.');
+                }
+                
+                // Success: clear cart and redirect
+                localStorage.removeItem('airton_cart');
+                localStorage.removeItem('airton_upsells');
+                window.location.href = 'checkout-success.html';
+            } catch (err) {
+                console.error(err);
+                alert(err.message);
+                btn.disabled = false;
+                btn.textContent = 'Confirmer ma commande';
+            }
+        });
 </script>
 
 </body></html>
