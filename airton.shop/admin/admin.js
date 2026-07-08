@@ -266,12 +266,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     <td><strong>#${o.id}</strong></td>
                     <td>${new Date(o.created_at).toLocaleString('fr-FR')}</td>
                     <td>
-                        ${o.first_name} ${o.last_name || ''}
+                        ${(o.first_name && o.first_name !== 'null') ? (o.first_name + ' ' + (o.last_name || '')) : '<em style="color:#aaa;">Invité</em>'}
                         ${o.order_data && o.order_data.bank_reference ? `<br><small style="color:#016FD0; font-weight:bold;">Ref: ${o.order_data.bank_reference}</small>` : ''}
                     </td>
                     <td>${o.email}</td>
-                    <td>${o.total_amount} €</td>
-                    <td>${o.order_data && o.order_data.payment_method === 'bank' ? 'Virement' : (o.order_data && o.order_data.payment_method === 'card' ? 'Carte' : '-')}</td>
+                    <td>${parseFloat(o.total_amount).toFixed(2)} €</td>
+                    <td>${o.order_data && (o.order_data.payment_method === 'bank' || o.order_data.payment_method === 'bank_transfer') ? 'Virement' : (o.order_data && o.order_data.payment_method === 'card' ? 'Carte' : '-')}</td>
                     <td>
                         <span style="padding: 3px 8px; border-radius: 4px; font-size: 0.85rem; color: white; background-color: ${o.status === 'paid' ? 'green' : (o.status === 'pending' ? 'orange' : 'gray')}">
                             ${o.status.toUpperCase()}
