@@ -96,6 +96,7 @@ module.exports = async (req, res) => {
         // Create Stripe Checkout Session
         const session = await stripe.checkout.sessions.create({
             customer: customer.id,
+            payment_method_types: ['card'],
             line_items: lineItems,
             mode: 'payment',
             client_reference_id: orderId ? orderId.toString() : undefined,
