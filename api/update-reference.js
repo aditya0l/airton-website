@@ -75,7 +75,7 @@ export default async function handler(req, res) {
                                 <h2 style="font-size: 24px; font-weight: bold; margin-bottom: 10px;">Votre commande est en attente de confirmation</h2>
                                 <p style="font-size: 14px; color: #555; margin-bottom: 30px; line-height: 1.5;">
                                     Nous avons bien reçu la référence de votre virement bancaire. Votre commande sera traitée dès réception de votre paiement sur notre compte.<br><br>
-                                    Pour toute question, notre support client est à votre écoute : <br><a href="mailto:service-client@airton-shop.eu" style="color: #016FD0; text-decoration: none;">service-client@airton-shop.eu</a>
+                                    Pour toute question, notre support client est à votre écoute : <br><a href="mailto:info@airton.shop" style="color: #016FD0; text-decoration: none;">info@airton.shop</a>
                                 </p>
                                 
                                 <h3 style="font-size: 18px; margin-bottom: 5px;">Détail de votre commande.</h3>
@@ -111,13 +111,13 @@ export default async function handler(req, res) {
                                 <h3 style="font-size: 16px; color: #016FD0; margin-bottom: 20px;">Rappel : vos informations de virement</h3>
                                 <div style="background: #ffffff; border-radius: 8px; display: table; width: 100%; padding: 20px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
                                     <div style="display: table-cell; width: 33%; text-align: center; border-right: 1px solid #e0e0e0; vertical-align: middle; padding: 0 10px;">
-                                        <p style="margin: 0; font-size: 11px; font-weight: bold;">Téléchargez<br>notre RIB <a href="mailto:service-client@airton-shop.eu?subject=Demande%20de%20RIB" style="color: #016FD0; text-decoration: none;">ici</a></p>
+                                        <p style="margin: 0; font-size: 11px; font-weight: bold;">Téléchargez<br>notre RIB <a href="mailto:info@airton.shop?subject=Demande%20de%20RIB" style="color: #016FD0; text-decoration: none;">ici</a></p>
                                     </div>
                                     <div style="display: table-cell; width: 33%; text-align: center; border-right: 1px solid #e0e0e0; vertical-align: middle; padding: 0 10px;">
                                         <p style="margin: 0; font-size: 11px; font-weight: bold;">Faire le virement<br>avec la référence <span style="color: #016FD0;">${reference || '#' + orderId}</span></p>
                                     </div>
                                     <div style="display: table-cell; width: 33%; text-align: center; vertical-align: middle; padding: 0 10px;">
-                                        <p style="margin: 0; font-size: 11px; font-weight: bold;">Envoyer le justificatif<br>à <a href="mailto:service-client@airton-shop.eu" style="color: #016FD0; text-decoration: none;">service-client@airton-shop.eu</a></p>
+                                        <p style="margin: 0; font-size: 11px; font-weight: bold;">Envoyer le justificatif<br>à <a href="mailto:info@airton.shop" style="color: #016FD0; text-decoration: none;">info@airton.shop</a></p>
                                     </div>
                                 </div>
                                 

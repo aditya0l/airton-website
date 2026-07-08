@@ -72,7 +72,7 @@ export default async function handler(req, res) {
                             <h2 style="font-size: 24px; font-weight: bold; margin-bottom: 10px;">Votre commande est confirmée !</h2>
                             <p style="font-size: 13px; color: #555; margin-bottom: 30px; line-height: 1.5;">
                                 Si vous constatez une erreur dans votre commande,<br>
-                                contactez nous à l'adresse : <a href="mailto:service-client@airton-shop.eu" style="color: #016FD0; text-decoration: none;">service-client@airton-shop.eu</a>
+                                contactez nous à l'adresse : <a href="mailto:info@airton.shop" style="color: #016FD0; text-decoration: none;">info@airton.shop</a>
                             </p>
                             
                             <div style="background: #ffffff; border-radius: 12px; padding: 40px 30px; text-align: center; box-shadow: 0 8px 30px rgba(0,0,0,0.04);">
@@ -116,7 +116,7 @@ export default async function handler(req, res) {
                                 </div>
                                 ` : ''}
 <!-- Action Button -->
-                                <a href="mailto:service-client@airton-shop.eu?subject=Demande%20de%20facture%20pour%20la%20commande%20%23${orderData.id}" style="display: inline-block; background-color: #2b8cff; color: #ffffff; text-decoration: none; padding: 14px 30px; border-radius: 30px; font-weight: 600; font-size: 14px; margin-bottom: 20px;">
+                                <a href="mailto:info@airton.shop?subject=Demande%20de%20facture%20pour%20la%20commande%20%23${orderData.id}" style="display: inline-block; background-color: #2b8cff; color: #ffffff; text-decoration: none; padding: 14px 30px; border-radius: 30px; font-weight: 600; font-size: 14px; margin-bottom: 20px;">
                                     Demander ma facture
                                 </a>
                                 
