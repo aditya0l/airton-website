@@ -221,9 +221,8 @@
             <div id="checkoutCartItems">
                 <!-- Items populated via JS -->
             </div>
-            <div class="cart-total" style="border-top: none; padding-top: 5px; margin-top: 5px; font-size: 1rem; font-weight: normal; color: #555;">
-                <span>Taxes (16.6%)</span>
-                <span id="checkoutTax">0,00 €</span>
+            <div class="cart-total" style="border-top: none; padding-top: 5px; margin-top: 5px; font-size: 0.9rem; font-weight: normal; color: #777;">
+                <span>Taxes incluses dans le prix</span>
             </div>
             <div class="cart-total">
                 <span>Total</span>
@@ -390,7 +389,6 @@
             const fullItems = getFullItemsList();
             
             const container = document.getElementById('checkoutCartItems');
-            const taxEl = document.getElementById('checkoutTax');
             const totalEl = document.getElementById('checkoutTotal');
             
             if (fullItems.length === 0) {
@@ -415,10 +413,8 @@
                 `;
             }).join('');
             
-            const tax = subtotal * 0.166;
-            const total = subtotal + tax;
+            const total = subtotal;
             
-            taxEl.textContent = tax.toFixed(2).replace('.', ',') + ' €';
             totalEl.textContent = total.toFixed(2).replace('.', ',') + ' €';
         }
 
