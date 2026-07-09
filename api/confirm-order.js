@@ -66,12 +66,7 @@ module.exports = async (req, res) => {
                     },
                 });
 
-                const mailOptions = {
-                    from: '"Airton Shop" <service-client@airton-shop.eu>',
-                    to: orderData.email,
-                    bcc: 'adityajaif2004@gmail.com',
-                    subject: action === 'remind' ? 'Action requise : Paiement en attente pour votre commande Airton' : 'Confirmation de votre commande Airton',
-                    html: `
+                const htmlConfirm = `
                         <div style="font-family: 'Helvetica Neue', Arial, sans-serif; background: linear-gradient(135deg, #faebd7 0%, #e0f7fa 100%); padding: 40px 20px; color: #111; text-align: center;">
                             <!-- Centering Table -->
                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -87,7 +82,7 @@ module.exports = async (req, res) => {
                                 <!-- Header -->
                                 ${action === 'remind' ? `
                                 <h2 style="font-size: 28px; color: #111; margin: 0 0 15px 0; font-weight: 800; letter-spacing: -0.5px; line-height: 1.2;">
-                                    ${orderData.first_name || 'Bonjour'}, votre commande est en attente de paiement.
+                                    Votre commande est confirmée !
                                 </h2>
                                 <p style="font-size: 15px; color: #555; margin-bottom: 30px; line-height: 1.6;">
                                     Votre commande Airton a bien été enregistrée, mais nous n’avons toujours pas reçu votre paiement par virement. Ce règlement est indispensable pour que nous puissions confirmer et traiter votre commande.<br><br>Une fois le virement reçu, nous pourrons immédiatement lancer la préparation et l’expédition.
@@ -201,7 +196,122 @@ ${(orderData.order_data?.payment_method === 'bank_transfer' || orderData.order_d
                                  
                              </div>
                          </div>
-                     `
+                     `;
+                
+                const htmlRemind = `
+<div style="font-family: 'Helvetica Neue', Arial, sans-serif; background: linear-gradient(180deg, #fff9f2 0%, #e0f7fa 100%); padding: 40px 20px; color: #111; text-align: center;">
+    <p style="font-size: 11px; color: #555; text-align: center; margin-bottom: 20px;">Afficher dans le navigateur</p>
+    <img src="https://airton.shop/cdn/shop/files/Logo_Airton_2025_Noir_2.svg" alt="Airton" style="height: 25px; margin: 0 auto 40px auto; display: block;">
+    
+    <div style="max-width: 600px; margin: 0 auto; text-align: left;">
+        <h1 style="font-size: 28px; font-weight: 800; color: #333; margin-bottom: 20px;">${orderData.first_name || 'Bonjour'}, votre commande est en attente de paiement.</h1>
+        <p style="font-size: 15px; color: #444; line-height: 1.6; margin-bottom: 20px;">
+            Votre commande Airton a bien été enregistrée, mais nous n'avons toujours pas reçu votre <strong>paiement par virement</strong>. Ce règlement est indispensable pour que nous puissions confirmer et traiter votre commande.
+        </p>
+        <p style="font-size: 15px; color: #444; line-height: 1.6; margin-bottom: 40px;">
+            Une fois le virement reçu, nous pourrons immédiatement lancer la préparation et l'expédition.
+        </p>
+
+        <!-- 3 Boxes Container -->
+        <div style="background-color: #222; border-radius: 12px; padding: 30px 20px; display: table; width: 100%; margin-bottom: 40px; box-sizing: border-box;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                    <td width="31%" align="center" valign="top">
+                        <div style="background: linear-gradient(135deg, #fff3e0 0%, #e3f2fd 100%); border-radius: 12px; padding: 20px 10px; height: 130px; text-align: center;">
+                            <p style="font-weight: bold; font-size: 14px; color: #111; margin: 0 0 10px 0;">1.<br>Téléchargez<br>notre RIB.</p>
+                            <a href="https://airton-website.vercel.app/pages/bank-details?ref=${orderData.order_data?.bank_reference || orderData.id}&amount=${orderData.total_amount}" style="display: inline-block; background-color: #5bc0de; color: #111; font-weight: bold; font-size: 11px; padding: 6px 12px; border-radius: 20px; text-decoration: none;">Disponible ici</a>
+                        </div>
+                    </td>
+                    <td width="3%"></td>
+                    <td width="32%" align="center" valign="top">
+                        <div style="background: linear-gradient(135deg, #fff3e0 0%, #e3f2fd 100%); border-radius: 12px; padding: 20px 10px; height: 130px; text-align: center;">
+                            <p style="font-weight: bold; font-size: 14px; color: #111; margin: 0;">2.<br>Faire le virement<br>avec la référence<br><span style="color: #2b8cff; font-size: 16px;">#${orderData.order_data?.bank_reference || orderData.id}</span></p>
+                        </div>
+                    </td>
+                    <td width="3%"></td>
+                    <td width="31%" align="center" valign="top">
+                        <div style="background: linear-gradient(135deg, #fff3e0 0%, #e3f2fd 100%); border-radius: 12px; padding: 20px 10px; height: 130px; text-align: center;">
+                            <p style="font-weight: bold; font-size: 14px; color: #111; margin: 0;">3.<br>Envoyer le<br>justificatif à<br><a href="mailto:info@airton.shop" style="color: #2b8cff; text-decoration: none;">info@airton.shop</a></p>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Review -->
+        <div style="background-color: #fcf6ef; border-radius: 16px; padding: 30px; margin: 0 auto 30px auto; max-width: 450px; text-align: center;">
+            <div style="display: table; margin: 0 auto 15px auto;">
+                <div style="display: table-cell; vertical-align: middle;">
+                    <div style="width: 32px; height: 32px; border-radius: 50%; background-color: #63d1a4; color: #fff; font-weight: bold; line-height: 32px; text-align: center; margin-right: 10px;">NC</div>
+                </div>
+                <div style="display: table-cell; vertical-align: middle; font-weight: bold; color: #333; padding-right: 15px;">Nicolas Conticello</div>
+                <div style="display: table-cell; vertical-align: middle; color: #888; font-size: 12px;">30 oct. 2025</div>
+            </div>
+            <p style="font-size: 15px; color: #333; font-style: italic; line-height: 1.5; margin-bottom: 15px;">
+                J'ai commandé 3 clims en deux ans. Je confirme que c'est une entreprise très sérieuse qui vend des produits de qualité au meilleur prix !
+            </p>
+            <div style="color: #63d1a4; font-size: 16px;">★★★★★</div>
+        </div>
+        
+        <!-- Trustpilot -->
+        <div style="text-align: center; margin-bottom: 40px;">
+            <span style="color: #111; font-weight: bold; font-size: 14px;">★ Trustpilot</span>
+            <span style="color: #63d1a4; font-size: 14px; margin: 0 10px;">★★★★★</span>
+            <span style="color: #555; font-size: 13px;">Noté 4,0 | + 15 000 avis</span>
+        </div>
+        
+        <hr style="border: 0; border-top: 1px solid #ddd; margin-bottom: 30px;">
+        
+        <!-- Features -->
+        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 40px; text-align: center;">
+            <tr>
+                <td width="33%" valign="top">
+                    <p style="font-size: 24px; margin: 0 0 10px 0;">🚚</p>
+                    <p style="font-weight: bold; font-size: 12px; margin: 0 0 5px 0; color: #111;">Livraison sécurisée</p>
+                    <p style="font-size: 11px; color: #666; margin: 0;">Livraison sur rendez-vous dans toute la France et en Europe</p>
+                </td>
+                <td width="33%" valign="top">
+                    <p style="font-size: 24px; margin: 0 0 10px 0;">💳</p>
+                    <p style="font-weight: bold; font-size: 12px; margin: 0 0 5px 0; color: #111;">Paiement en plusieurs fois</p>
+                    <p style="font-size: 11px; color: #666; margin: 0;">Avec Alma, payez en 2x, 3x, 4x ou 10x !</p>
+                </td>
+                <td width="33%" valign="top">
+                    <p style="font-size: 24px; margin: 0 0 10px 0;">👩‍💻</p>
+                    <p style="font-weight: bold; font-size: 12px; margin: 0 0 5px 0; color: #111;">Conseillers dédiés</p>
+                    <p style="font-size: 11px; color: #666; margin: 0;">Service client disponible 7j/7 de 9h00 à 19h.</p>
+                </td>
+            </tr>
+        </table>
+        
+        <hr style="border: 0; border-top: 1px solid #ddd; margin-bottom: 30px;">
+        
+        <!-- Footer -->
+        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+            <tr>
+                <td width="60%" style="font-size: 9px; color: #777; line-height: 1.5; text-align: left;">
+                    Ce message a été envoyé par Airton, 255 boulevard de la madeleine, 06000 Nice, France<br>
+                    Veuillez ne pas répondre à ce message. Si vous avez des questions, rendez-vous sur Airton.fr<br>
+                    © 2025 Airton Tous droits réservés<br><br>
+                    <a href="#" style="color: #777; text-decoration: underline;">Se désinscrire</a>
+                </td>
+                <td width="40%" align="right" valign="top">
+                    <p style="font-weight: bold; font-size: 11px; margin: 0 0 10px 0; color: #111;">Suivez notre actualité</p>
+                    <a href="#" style="text-decoration: none; font-size: 14px; color: #111; margin-right: 5px;">f</a>
+                    <a href="#" style="text-decoration: none; font-size: 14px; color: #111; margin-right: 5px;">in</a>
+                    <a href="#" style="text-decoration: none; font-size: 14px; color: #111;">yt</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+`;
+
+                const mailOptions = {
+                    from: '"Airton Shop" <service-client@airton-shop.eu>',
+                    to: orderData.email,
+                    bcc: 'adityajaif2004@gmail.com',
+                    subject: action === 'remind' ? 'Action requise : Paiement en attente pour votre commande Airton' : 'Confirmation de votre commande Airton',
+                    html: action === 'remind' ? htmlRemind : htmlConfirm
                 };
 
                 await transporter.sendMail(mailOptions);
