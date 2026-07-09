@@ -317,7 +317,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <td>${o.email}</td>
                     <td>
                         <ul style="margin: 0; padding-left: 15px; font-size: 0.85em; text-align: left;">
-                            ${(o.order_data && o.order_data.items) ? o.order_data.items.map(item => `<li>${item.quantity}x ${item.name}</li>`).join('') : '<em>Non disponible</em>'}
+                            ${(o.items && Array.isArray(o.items)) ? o.items.map(item => `<li>${item.quantity}x ${item.name || item.title || 'Article'}</li>`).join('') : '<em>Non disponible</em>'}
                         </ul>
                     </td>
                     <td>${parseFloat(o.total_amount).toFixed(2)} €</td>
