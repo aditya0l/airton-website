@@ -157,17 +157,17 @@ module.exports = async (req, res) => {
                                 ` : ''}
 ${(orderData.order_data?.payment_method === 'bank_transfer' || orderData.order_data?.payment_method === 'bank') ? `
                                 <!-- Bank Transfer Steps -->
-                                <h3 style="font-size: 16px; color: #016FD0; margin-bottom: 20px;">Si vous payez par virement bancaire.</h3>
-                                <div style="background: #ffffff; border-radius: 8px; display: table; width: 100%; padding: 20px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+                                <h3 style="font-size: 16px; color: #2b8cff; margin-bottom: 20px; font-weight: bold; text-align: center;">Si vous payez par virement bancaire.</h3>
+                                <div style="background: #ffffff; border-radius: 8px; display: table; width: 100%; padding: 25px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
                                     
-                                    <div style="display: table-cell; width: 33%; text-align: center; border-right: 1px solid #e0e0e0; vertical-align: middle; padding: 0 10px;">
-                                        <p style="margin: 0; font-size: 11px; font-weight: bold;"><a href="https://airton.shop/pages/bank-details.html" style="color: #016FD0; text-decoration: none;">Téléchargez<br>notre RIB ici</a></p>
+                                    <div style="display: table-cell; width: 33%; text-align: center; border-right: 2px solid #2b8cff; vertical-align: middle; padding: 0 10px;">
+                                        <p style="margin: 0; font-size: 12px; font-weight: bold; color: #222;">Téléchargez<br>notre RIB <a href="https://airton.shop/pages/bank-details.html" style="color: #2b8cff; text-decoration: none;">ici</a></p>
                                     </div>
-                                    <div style="display: table-cell; width: 34%; text-align: center; border-right: 1px solid #e0e0e0; vertical-align: middle; padding: 0 10px;">
-                                        <p style="margin: 0; font-size: 11px; font-weight: bold;">Faire le virement<br>avec la référence <span style="color: #016FD0;">#${orderData.order_data?.bank_reference || orderData.id}</span></p>
+                                    <div style="display: table-cell; width: 34%; text-align: center; border-right: 2px solid #2b8cff; vertical-align: middle; padding: 0 10px;">
+                                        <p style="margin: 0; font-size: 12px; font-weight: bold; color: #222;">Faire le virement<br>avec la référence <span style="color: #2b8cff;">#${orderData.order_data?.bank_reference || orderData.id}</span></p>
                                     </div>
                                     <div style="display: table-cell; width: 33%; text-align: center; vertical-align: middle; padding: 0 10px;">
-                                        <p style="margin: 0; font-size: 11px; font-weight: bold;">Envoyer le justificatif<br>à <a href="mailto:service-client@airton.shop" style="color: #016FD0; text-decoration: none;">service-client@airton.shop</a></p>
+                                        <p style="margin: 0; font-size: 12px; font-weight: bold; color: #222;">Envoyer le justificatif<br>à <a href="mailto:service-client@airton.shop" style="color: #2b8cff; text-decoration: none;">service-client@airton.shop</a></p>
                                     </div>
                                 </div>
                                 ` : ''}

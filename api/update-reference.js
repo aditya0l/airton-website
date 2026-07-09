@@ -71,6 +71,7 @@ export default async function handler(req, res) {
                                 <!-- Logo -->
                                 <img src="https://airton.shop/cdn/shop/files/Logo_Airton_2025_Noir_2.svg" alt="Airton" style="height: 35px; margin-bottom: 20px;">
                                 
+
                                 <!-- Header -->
                                 <h2 style="font-size: 24px; font-weight: bold; margin-bottom: 10px;">Votre commande est en attente de confirmation</h2>
                                 <p style="font-size: 14px; color: #555; margin-bottom: 30px; line-height: 1.5;">
@@ -112,6 +113,21 @@ export default async function handler(req, res) {
                                 <a href="mailto:service-client@airton.shop?subject=Demande%20de%20facture%20pour%20la%20commande%20%23${orderDataRes.id}" style="display: inline-block; background-color: #2b8cff; color: #ffffff; text-decoration: none; padding: 14px 30px; border-radius: 30px; font-weight: 600; font-size: 14px; margin-bottom: 20px;">
                                     Télécharger ma facture
                                 </a>
+                                
+                                <!-- Bank Transfer Steps -->
+                                <h3 style="font-size: 16px; color: #2b8cff; margin-bottom: 20px; font-weight: bold; text-align: center;">Si vous payez par virement bancaire.</h3>
+                                <div style="background: #ffffff; border-radius: 8px; display: table; width: 100%; padding: 25px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+                                    
+                                    <div style="display: table-cell; width: 33%; text-align: center; border-right: 2px solid #2b8cff; vertical-align: middle; padding: 0 10px;">
+                                        <p style="margin: 0; font-size: 12px; font-weight: bold; color: #222;">Téléchargez<br>notre RIB <a href="https://airton.shop/pages/bank-details.html" style="color: #2b8cff; text-decoration: none;">ici</a></p>
+                                    </div>
+                                    <div style="display: table-cell; width: 34%; text-align: center; border-right: 2px solid #2b8cff; vertical-align: middle; padding: 0 10px;">
+                                        <p style="margin: 0; font-size: 12px; font-weight: bold; color: #222;">Faire le virement<br>avec la référence <span style="color: #2b8cff;">#${orderDataRes.id}</span></p>
+                                    </div>
+                                    <div style="display: table-cell; width: 33%; text-align: center; vertical-align: middle; padding: 0 10px;">
+                                        <p style="margin: 0; font-size: 12px; font-weight: bold; color: #222;">Envoyer le justificatif<br>à <a href="mailto:service-client@airton.shop" style="color: #2b8cff; text-decoration: none;">service-client@airton.shop</a></p>
+                                    </div>
+                                </div>
                                 
                                 <!-- Footer -->
                                 <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
