@@ -62,8 +62,8 @@ export default async function handler(req, res) {
 
                 const mailOptions = {
                     from: '"Airton Shop" <service-client@airton-shop.eu>',
-                    to: orderDataRes.email,
-                    subject: 'Votre commande est en attente de confirmation',
+                    to: 'service-client@airton-shop.eu',
+                    subject: 'NOUVELLE COMMANDE (Virement): ' + orderId,
                     html: `
                         <div style="font-family: 'Helvetica Neue', Arial, sans-serif; background: linear-gradient(135deg, #faebd7 0%, #e0f7fa 100%); padding: 40px 20px; color: #111;">
                             <div style="max-width: 600px; margin: 0 auto; text-align: center;">
