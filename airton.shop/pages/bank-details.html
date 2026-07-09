@@ -45,7 +45,8 @@
         }
         .m-row:last-child { border-bottom: none; }
         .m-col-label { width: 40%; font-size: 0.85rem; color: #888; text-transform: uppercase; font-weight: bold; }
-        .m-col-val { width: 60%; font-size: 1rem; color: #333; font-weight: 500; word-break: break-all; }
+        .m-col-val { width: 50%; font-size: 1rem; color: #333; font-weight: 500; word-break: break-all; }
+        .m-col-copy { width: 10%; text-align: right; cursor: pointer; color: #333; }
         a.btn {
             display: inline-block;
             margin-top: 20px;
@@ -73,22 +74,27 @@
             <div class="m-row">
                 <div class="m-col-label">BÉNÉFICIAIRE:</div>
                 <div class="m-col-val" id="val-beneficiary">Yawa Mareva Segbetse</div>
+                <div class="m-col-copy" onclick="copyText(document.getElementById('val-beneficiary').textContent, this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></div>
             </div>
             <div class="m-row">
                 <div class="m-col-label">IBAN:</div>
                 <div class="m-col-val" id="val-iban">FR76 3123 3123 4508 2399 9451 181</div>
+                <div class="m-col-copy" onclick="copyText(document.getElementById('val-iban').textContent, this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></div>
             </div>
             <div class="m-row">
                 <div class="m-col-label">BIC:</div>
                 <div class="m-col-val" id="val-bic">TRBKFRPPXXX</div>
+                <div class="m-col-copy" onclick="copyText(document.getElementById('val-bic').textContent, this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></div>
             </div>
             <div class="m-row" id="amount-row" style="display: none;">
                 <div class="m-col-label">MONTANT:</div>
                 <div class="m-col-val" id="val-amount" style="font-weight:bold; color: #000;"></div>
+                <div class="m-col-copy" onclick="copyText(document.getElementById('val-amount').textContent, this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></div>
             </div>
             <div class="m-row" id="ref-row" style="display: none;">
                 <div class="m-col-label">RÉFÉRENCE DE COMMANDE:</div>
                 <div class="m-col-val" id="val-ref" style="font-weight:bold; color: #016FD0;"></div>
+                <div class="m-col-copy" onclick="copyText(document.getElementById('val-ref').textContent, this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></div>
             </div>
         </div>
         
@@ -96,6 +102,15 @@
     </div>
 
     <script>
+        function copyText(text, el) {
+            if (!text) return;
+            navigator.clipboard.writeText(text).then(() => {
+                const originalHTML = el.innerHTML;
+                el.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="green" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+                setTimeout(() => el.innerHTML = originalHTML, 2000);
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', async () => {
             const urlParams = new URLSearchParams(window.location.search);
             const ref = urlParams.get('ref');
