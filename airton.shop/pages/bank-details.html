@@ -29,23 +29,23 @@
             line-height: 1.6;
             margin-bottom: 30px;
         }
-        .bank-details {
+        .m-table {
             background: #f8f9fa;
-            border: 1px solid #eaeaea;
             border-radius: 8px;
-            padding: 25px;
+            padding: 10px 0;
             text-align: left;
-            font-size: 15px;
-            color: #333;
+            border: 1px solid #eaeaea;
             margin-bottom: 30px;
         }
-        .bank-details p {
-            margin: 0 0 15px 0;
-            font-size: 15px;
+        .m-row {
+            display: flex;
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            align-items: center;
         }
-        .bank-details p:last-child {
-            margin-bottom: 0;
-        }
+        .m-row:last-child { border-bottom: none; }
+        .m-col-label { width: 40%; font-size: 0.85rem; color: #888; text-transform: uppercase; font-weight: bold; }
+        .m-col-val { width: 60%; font-size: 1rem; color: #333; font-weight: 500; word-break: break-all; }
         a.btn {
             display: inline-block;
             margin-top: 20px;
@@ -69,10 +69,23 @@
         <h1>Nos Coordonnées Bancaires</h1>
         <p>Merci d'effectuer votre virement bancaire en utilisant les informations ci-dessous. N'oubliez pas d'indiquer votre numéro de commande en référence de votre virement.</p>
         
-        <div class="bank-details">
-            <p><strong>BÉNÉFICIAIRE :</strong> <span id="val-beneficiary">Yawa Mareva Segbetse</span></p>
-            <p><strong>IBAN :</strong> <span id="val-iban">FR76 3123 3123 4508 2399 9451 181</span></p>
-            <p><strong>BIC :</strong> <span id="val-bic">TRBKFRPPXXX</span></p>
+        <div class="m-table">
+            <div class="m-row">
+                <div class="m-col-label">BÉNÉFICIAIRE:</div>
+                <div class="m-col-val" id="val-beneficiary">Yawa Mareva Segbetse</div>
+            </div>
+            <div class="m-row">
+                <div class="m-col-label">IBAN:</div>
+                <div class="m-col-val" id="val-iban">FR76 3123 3123 4508 2399 9451 181</div>
+            </div>
+            <div class="m-row">
+                <div class="m-col-label">BIC:</div>
+                <div class="m-col-val" id="val-bic">TRBKFRPPXXX</div>
+            </div>
+            <div class="m-row" id="ref-row" style="display: none;">
+                <div class="m-col-label">RÉFÉRENCE DE COMMANDE:</div>
+                <div class="m-col-val" id="val-ref" style="font-weight:bold; color: #016FD0;"></div>
+            </div>
         </div>
         
         <a href="/" class="btn">Retour à la boutique</a>
@@ -80,6 +93,12 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const ref = urlParams.get('ref');
+            if (ref) {
+                document.getElementById('ref-row').style.display = 'flex';
+                document.getElementById('val-ref').textContent = '#' + ref.replace(/^#/, '');
+            }
             try {
                 const response = await fetch('/api/settings?key=bank_details');
                 if (response.ok) {
