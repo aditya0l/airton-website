@@ -155,9 +155,6 @@ document.addEventListener('DOMContentLoaded', () => {
             showMessage(error.message, 'error');
         }
     });
-
-    });
-
     // Submit Bank Settings
     const settingsBankForm = document.getElementById('settings-bank-form');
     if (settingsBankForm) {
@@ -303,7 +300,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const orders = await response.json();
             
             if (orders.length === 0) {
-                orderTableBody.innerHTML = `<tr><td colspan="7" style="text-align:center;">Aucune commande.</td></tr>`;
+                orderTableBody.innerHTML = `<tr><td colspan="9" style="text-align:center;">Aucune commande.</td></tr>`;
                 return;
             }
             
@@ -318,6 +315,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         ${o.order_data && o.order_data.bank_reference ? `<br><small style="color:#016FD0; font-weight:bold;">Ref: ${o.order_data.bank_reference}</small>` : ''}
                     </td>
                     <td>${o.email}</td>
+                    <td>
+                        <ul style="margin: 0; padding-left: 15px; font-size: 0.85em; text-align: left;">
+                            ${(o.order_data && o.order_data.items) ? o.order_data.items.map(item => `<li>${item.quantity}x ${item.name}</li>`).join('') : '<em>Non disponible</em>'}
+                        </ul>
+                    </td>
                     <td>${parseFloat(o.total_amount).toFixed(2)} €</td>
                     <td>${o.order_data && (o.order_data.payment_method === 'bank' || o.order_data.payment_method === 'bank_transfer') ? 'Virement' : (o.order_data && o.order_data.payment_method === 'card' ? 'Carte' : '-')}</td>
                     <td>
@@ -340,7 +342,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             });
         } catch (error) {
-            orderTableBody.innerHTML = `<tr><td colspan="7" style="color:red;text-align:center;">${error.message}</td></tr>`;
+            orderTableBody.innerHTML = `<tr><td colspan="9" style="color:red;text-align:center;">${error.message}</td></tr>`;
         }
     }
 
