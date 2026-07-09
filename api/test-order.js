@@ -63,33 +63,33 @@ export default async function handler(req, res) {
                 to: orderData.email,
                 subject: 'Confirmation de votre commande Airton',
                 html: `
-                    <div style="font-family: 'Helvetica Neue', Arial, sans-serif; background: linear-gradient(135deg, #faebd7 0%, #e0f7fa 100%); padding: 40px 20px; color: #111;">
-                        <div style="max-width: 600px; margin: 0 auto; text-align: center;">
-                            
-                            <!-- Logo -->
-                            <img src="https://airton.shop/cdn/shop/files/Logo_Airton_2025_Noir_2.svg" alt="Airton" style="height: 35px; margin-bottom: 20px;">
-                            
-                            <!-- Header -->
-                            <h2 style="font-size: 24px; font-weight: bold; margin-bottom: 10px;">Votre commande est confirmée !</h2>
-                            <p style="font-size: 13px; color: #555; margin-bottom: 30px; line-height: 1.5;">
-                                Si vous constatez une erreur dans votre commande,<br>
-                                contactez nous à l'adresse : <a href="mailto:service-client@airton-shop.eu" style="color: #016FD0; text-decoration: none;">service-client@airton-shop.eu</a>
-                            </p>
-                            
-                            <div style="background: #ffffff; border-radius: 12px; padding: 40px 30px; text-align: center; box-shadow: 0 8px 30px rgba(0,0,0,0.04);">
-                                <h3 style="margin-top: 0; font-size: 18px; font-weight: 600; margin-bottom: 5px;">Détail de votre commande.</h3>
-                                <p style="font-size: 15px; margin-bottom: 30px; color: #666;">Commande <span style="color: #016FD0; font-weight: bold;">#${orderData.id}</span>.</p>
+                        <div style="font-family: 'Helvetica Neue', Arial, sans-serif; background: linear-gradient(135deg, #faebd7 0%, #e0f7fa 100%); padding: 40px 20px; color: #111;">
+                            <div style="max-width: 600px; margin: 0 auto; text-align: center;">
                                 
-                                <div style="background: #fdfdfd; border: 1px solid #eee; border-radius: 8px; padding: 15px; margin-bottom: 30px;">
-                                    ${orderData.items && orderData.items.length > 0 ? orderData.items.map(item => `
-                                    <div style="display: table; width: 100%; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 10px;">
+                                <!-- Logo -->
+                                <img src="https://airton.shop/cdn/shop/files/Logo_Airton_2025_Noir_2.svg" alt="Airton" style="height: 35px; margin-bottom: 20px;">
+                                
+                                <!-- Header -->
+                                <h2 style="font-size: 24px; font-weight: bold; margin-bottom: 10px;">Votre commande est confirmée !</h2>
+                                <p style="font-size: 13px; color: #555; margin-bottom: 30px; line-height: 1.5;">
+                                    Si vous constatez une erreur dans votre commande,<br>
+                                    contactez nous à l'adresse : <a href="mailto:service-client@airton.shop" style="color: #016FD0; text-decoration: none;">service-client@airton.shop</a>
+                                </p>
+                                
+                                <h3 style="font-size: 18px; margin-bottom: 5px;">Détail de votre commande.</h3>
+                                <p style="font-size: 16px; margin-bottom: 25px; font-weight: bold;">Commande <span style="color: #016FD0;">#${orderData.id}</span>.</p>
+                                
+                                <!-- Order Items Card -->
+                                <div style="background-color: #ffffff; border-radius: 8px; padding: 25px; margin-bottom: 30px; text-align: left; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+                                    ${orderData.items ? orderData.items.map(item => `
+                                    <div style="display: table; width: 100%; margin-bottom: 15px; border-bottom: 1px solid #f0f0f0; padding-bottom: 15px;">
                                         <div style="display: table-cell; vertical-align: middle; width: 60px;">
                                             ${(item.image_url || item.image) ? `<img src="${item.image_url || item.image}" width="50" height="50" style="border-radius: 4px; object-fit: cover; border: 1px solid #eaeaea;" />` : `<div style="width: 50px; height: 50px; background: #f8f9fa; border: 1px solid #eaeaea; border-radius: 4px;"></div>`}
                                         </div>
-                                        <div style="display: table-cell; vertical-align: middle; text-align: left; font-size: 13px; color: #555; padding-left: 10px;">
+                                        <div style="display: table-cell; vertical-align: middle; padding-left: 15px; font-size: 13px;">
                                             ${item.title || item.name}
                                         </div>
-                                        <div style="display: table-cell; vertical-align: middle; text-align: center; font-size: 13px; color: #888; width: 40px;">
+                                        <div style="display: table-cell; vertical-align: middle; text-align: right; font-size: 13px; color: #777; width: 40px;">
                                             x${item.quantity}
                                         </div>
                                         <div style="display: table-cell; vertical-align: middle; text-align: right; font-size: 13px; font-weight: 500; width: 80px;">
@@ -99,43 +99,16 @@ export default async function handler(req, res) {
                                     `).join('') : '<p>Articles non disponibles</p>'}
                                     
                                     <div style="display: table; width: 100%; padding-top: 10px;">
-                                        <div style="display: table-cell; vertical-align: middle; font-size: 13px; color: #555;">Montant total :</div>
+                                        <div style="display: table-cell; vertical-align: middle; font-size: 13px; color: #555;">Code promo :</div>
                                         <div style="display: table-cell; vertical-align: middle; text-align: right; font-size: 20px; font-weight: bold;">
                                             ${Number(orderData.total_amount).toFixed(2).replace('.', ',')}€
                                         </div>
                                     </div>
                                 </div>
                                 
-                                
-                                ${orderData.order_data?.payment_method === 'card' ? `
-                                <!-- Card Payment Steps -->
-                                <h3 style="font-size: 16px; color: #28a745; margin-bottom: 20px;">Paiement par carte bancaire validé.</h3>
-                                <div style="background: #ffffff; border-radius: 8px; display: table; width: 100%; padding: 20px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
-                                    <div style="display: table-cell; text-align: center; vertical-align: middle; padding: 0 10px;">
-                                        <p style="margin: 0; font-size: 13px; font-weight: bold; color: #555;">Votre commande a été réglée avec succès par carte bancaire.</p>
-                                    </div>
-                                </div>
-                                ` : ''}
-${(orderData.order_data?.payment_method === 'bank_transfer' || orderData.order_data?.payment_method === 'bank') ? `
-                                <!-- Bank Transfer Steps -->
-                                <h3 style="font-size: 16px; color: #2b8cff; margin-bottom: 20px; font-weight: bold; text-align: center;">Si vous payez par virement bancaire.</h3>
-                                <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background: #ffffff; border-radius: 8px; padding: 25px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
-                                    <tr>
-                                        <td width="33%" align="center" valign="middle" style="border-right: 2px solid #2b8cff; padding: 0 10px;">
-                                            <p style="margin: 0; font-size: 12px; font-weight: bold; color: #222;">Téléchargez<br>notre RIB <a href="https://airton-website.vercel.app/pages/bank-details" style="color: #2b8cff; text-decoration: none;">ici</a></p>
-                                        </td>
-                                        <td width="34%" align="center" valign="middle" style="border-right: 2px solid #2b8cff; padding: 0 10px;">
-                                            <p style="margin: 0; font-size: 12px; font-weight: bold; color: #222;">Faire le virement<br>avec la référence <span style="color: #2b8cff;">#${orderData.order_data?.bank_reference || orderData.id}</span></p>
-                                        </td>
-                                        <td width="33%" align="center" valign="middle" style="padding: 0 10px;">
-                                            <p style="margin: 0; font-size: 12px; font-weight: bold; color: #222;">Envoyer le justificatif<br>à <a href="mailto:service-client@airton.shop" style="color: #2b8cff; text-decoration: none;">service-client@airton.shop</a></p>
-                                        </td>
-                                    </tr>
-                                </table>
-                                ` : ''}
                                 <!-- Action Button -->
-                                <a href="mailto:service-client@airton-shop.eu?subject=Demande%20de%20facture%20pour%20la%20commande%20%23${orderData.id}" style="display: inline-block; background-color: #2b8cff; color: #ffffff; text-decoration: none; padding: 14px 30px; border-radius: 30px; font-weight: 600; font-size: 14px; margin-bottom: 20px;">
-                                    Demander ma facture
+                                <a href="mailto:service-client@airton.shop?subject=Demande%20de%20facture%20pour%20la%20commande%20%23${orderData.id}" style="display: inline-block; background-color: #2b8cff; color: #ffffff; text-decoration: none; padding: 14px 30px; border-radius: 30px; font-weight: 600; font-size: 14px; margin-bottom: 20px;">
+                                    Télécharger ma facture
                                 </a>
                                 
                                 <!-- Dashed separator -->
@@ -167,11 +140,44 @@ ${(orderData.order_data?.payment_method === 'bank_transfer' || orderData.order_d
                                         </td>
                                     </tr>
                                 </table>
-                            </div>
-                        </div>
-                    </div>
-                `
-            };
+                                
+                                
+                                ${orderData.order_data?.payment_method === 'card' ? `
+                                <!-- Card Payment Steps -->
+                                <h3 style="font-size: 16px; color: #28a745; margin-bottom: 20px;">Paiement par carte bancaire validé.</h3>
+                                <div style="background: #ffffff; border-radius: 8px; display: table; width: 100%; padding: 20px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+                                    <div style="display: table-cell; text-align: center; vertical-align: middle; padding: 0 10px;">
+                                        <p style="margin: 0; font-size: 13px; font-weight: bold; color: #555;">Votre commande a été réglée avec succès par carte bancaire.</p>
+                                    </div>
+                                </div>
+                                ` : ''}
+${(orderData.order_data?.payment_method === 'bank_transfer' || orderData.order_data?.payment_method === 'bank') ? `
+                                <!-- Bank Transfer Steps -->
+                                <h3 style="font-size: 16px; color: #2b8cff; margin-bottom: 20px; font-weight: bold; text-align: center;">Si vous payez par virement bancaire.</h3>
+                                <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background: #ffffff; border-radius: 8px; padding: 25px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+                                    <tr>
+                                        <td width="33%" align="center" valign="middle" style="border-right: 2px solid #2b8cff; padding: 0 10px;">
+                                            <p style="margin: 0; font-size: 12px; font-weight: bold; color: #222;">Téléchargez<br>notre RIB <a href="https://airton-website.vercel.app/pages/bank-details" style="color: #2b8cff; text-decoration: none;">ici</a></p>
+                                        </td>
+                                        <td width="34%" align="center" valign="middle" style="border-right: 2px solid #2b8cff; padding: 0 10px;">
+                                            <p style="margin: 0; font-size: 12px; font-weight: bold; color: #222;">Faire le virement<br>avec la référence <span style="color: #2b8cff;">#${orderData.order_data?.bank_reference || orderData.id}</span></p>
+                                        </td>
+                                        <td width="33%" align="center" valign="middle" style="padding: 0 10px;">
+                                            <p style="margin: 0; font-size: 12px; font-weight: bold; color: #222;">Envoyer le justificatif<br>à <a href="mailto:service-client@airton.shop" style="color: #2b8cff; text-decoration: none;">service-client@airton.shop</a></p>
+                                        </td>
+                                    </tr>
+                                </table>
+                                ` : ''}
+                                
+                                <!-- Footer -->
+                                <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
+                                    <p style="margin: 0; font-size: 12px; color: #888;">Pour toute question, contactez notre service client : <a href="mailto:service-client@airton.shop" style="color: #016FD0; text-decoration: none;">service-client@airton.shop</a></p>
+                                </div>
+                                 
+                             </div>
+                         </div>
+                     `
+                };
 
             await transporter.sendMail(mailOptions);
         } catch (err) {
