@@ -116,16 +116,15 @@ export default async function handler(req, res) {
                                 
                                 <!-- Bank Transfer Steps -->
                                 <h3 style="font-size: 16px; color: #2b8cff; margin-bottom: 20px; font-weight: bold; text-align: center;">Si vous payez par virement bancaire.</h3>
-                                <div style="background: #ffffff; border-radius: 8px; display: table; width: 100%; padding: 25px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
-                                    
-                                    <div style="display: table-cell; width: 33%; text-align: center; border-right: 2px solid #2b8cff; vertical-align: middle; padding: 0 10px;">
-                                        <p style="margin: 0; font-size: 12px; font-weight: bold; color: #222;">Téléchargez<br>notre RIB <a href="https://airton-website.vercel.app/pages/bank-details" style="color: #2b8cff; text-decoration: none;">ici</a></p>
+                                <div style="background: #ffffff; border-radius: 8px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid #eaeaea;">
+                                    <div style="padding: 10px 0; border-bottom: 1px solid #eaeaea; text-align: center;">
+                                        <p style="margin: 0; font-size: 14px; font-weight: bold; color: #222;">1. Téléchargez notre RIB <a href="https://airton-website.vercel.app/pages/bank-details" style="color: #2b8cff; text-decoration: none;">ici</a></p>
                                     </div>
-                                    <div style="display: table-cell; width: 34%; text-align: center; border-right: 2px solid #2b8cff; vertical-align: middle; padding: 0 10px;">
-                                        <p style="margin: 0; font-size: 12px; font-weight: bold; color: #222;">Faire le virement<br>avec la référence <span style="color: #2b8cff;">#${orderDataRes.id}</span></p>
+                                    <div style="padding: 15px 0; border-bottom: 1px solid #eaeaea; text-align: center;">
+                                        <p style="margin: 0; font-size: 14px; font-weight: bold; color: #222;">2. Faire le virement avec la référence <span style="color: #2b8cff;">#${orderDataRes.id}</span></p>
                                     </div>
-                                    <div style="display: table-cell; width: 33%; text-align: center; vertical-align: middle; padding: 0 10px;">
-                                        <p style="margin: 0; font-size: 12px; font-weight: bold; color: #222;">Envoyer le justificatif<br>à <a href="mailto:service-client@airton.shop" style="color: #2b8cff; text-decoration: none;">service-client@airton.shop</a></p>
+                                    <div style="padding: 15px 0 10px 0; text-align: center;">
+                                        <p style="margin: 0; font-size: 14px; font-weight: bold; color: #222;">3. Envoyer le justificatif à <a href="mailto:service-client@airton.shop" style="color: #2b8cff; text-decoration: none;">service-client@airton.shop</a></p>
                                     </div>
                                 </div>
                                 
