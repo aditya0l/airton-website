@@ -74,7 +74,8 @@ export default async function handler(req, res) {
                                 <!-- Header -->
                                 <h2 style="font-size: 24px; font-weight: bold; margin-bottom: 10px;">Votre commande est en attente de confirmation</h2>
                                 <p style="font-size: 14px; color: #555; margin-bottom: 30px; line-height: 1.5;">
-                                    Pour toute question, notre support client est à votre écoute : <br><a href="mailto:service-client@airton-shop.eu" style="color: #016FD0; text-decoration: none;">service-client@airton-shop.eu</a>
+                                    Si vous constatez une erreur dans votre commande,<br>
+                                    contactez nous à l'adresse : <a href="mailto:service-client@airton.shop" style="color: #016FD0; text-decoration: none;">service-client@airton.shop</a>
                                 </p>
                                 
                                 <h3 style="font-size: 18px; margin-bottom: 5px;">Détail de votre commande.</h3>
@@ -107,12 +108,14 @@ export default async function handler(req, res) {
                                     </div>
                                 </div>
                                 
+                                <!-- Action Button -->
+                                <a href="mailto:service-client@airton.shop?subject=Demande%20de%20facture%20pour%20la%20commande%20%23${orderDataRes.id}" style="display: inline-block; background-color: #2b8cff; color: #ffffff; text-decoration: none; padding: 14px 30px; border-radius: 30px; font-weight: 600; font-size: 14px; margin-bottom: 20px;">
+                                    Télécharger ma facture
+                                </a>
+                                
                                 <!-- Footer -->
                                 <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
-                                    <div style="margin-bottom: 20px;">
-                                        <a href="https://airton.shop/pages/bank-details.html" style="display: inline-block; background-color: #016FD0; color: #ffffff; text-decoration: none; padding: 12px 25px; border-radius: 5px; font-weight: bold; font-size: 14px;">Voir nos coordonnées bancaires</a>
-                                    </div>
-                                    <p style="margin: 0; font-size: 12px; color: #888;">Pour toute question, contactez notre service client : <a href="mailto:service-client@airton-shop.eu" style="color: #016FD0; text-decoration: none;">service-client@airton-shop.eu</a></p>
+                                    <p style="margin: 0; font-size: 12px; color: #888;">Pour toute question, contactez notre service client : <a href="mailto:service-client@airton.shop" style="color: #016FD0; text-decoration: none;">service-client@airton.shop</a></p>
                                 </div>
                                  
                              </div>
