@@ -914,22 +914,22 @@
         <div class="m-table">
             <div class="m-row">
                 <div class="m-col-label">BÉNÉFICIAIRE:</div>
-                <div class="m-col-val">Yawa Mareva Segbetse</div>
-                <div class="m-col-copy" onclick="copyText('Yawa Mareva Segbetse', this)">
+                <div class="m-col-val" id="checkout-bank-beneficiary">Yawa Mareva Segbetse</div>
+                <div class="m-col-copy" id="checkout-copy-beneficiary" onclick="copyText('Yawa Mareva Segbetse', this)">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                 </div>
             </div>
             <div class="m-row">
                 <div class="m-col-label">IBAN:</div>
-                <div class="m-col-val">FR76 3123 3123 4508 2399 9451 181</div>
-                <div class="m-col-copy" onclick="copyText('FR7631233123450823999451181', this)">
+                <div class="m-col-val" id="checkout-bank-iban">FR76 3123 3123 4508 2399 9451 181</div>
+                <div class="m-col-copy" id="checkout-copy-iban" onclick="copyText('FR7631233123450823999451181', this)">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                 </div>
             </div>
             <div class="m-row">
                 <div class="m-col-label">BIC:</div>
-                <div class="m-col-val">TRBKFRPPXXX</div>
-                <div class="m-col-copy" onclick="copyText('TRBKFRPPXXX', this)">
+                <div class="m-col-val" id="checkout-bank-bic">TRBKFRPPXXX</div>
+                <div class="m-col-copy" id="checkout-copy-bic" onclick="copyText('TRBKFRPPXXX', this)">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                 </div>
             </div>
@@ -1521,6 +1521,33 @@
                     btn.disabled = false;
                     btn.textContent = 'Confirmer le paiement';
                 }
+            }
+        });
+    </script>
+    <script>
+        // Fetch dynamic bank settings for checkout
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const response = await fetch('/api/settings?key=bank_details');
+                if (response.ok) {
+                    const settings = await response.json();
+                    
+                    if (settings.beneficiary) {
+                        document.getElementById('checkout-bank-beneficiary').textContent = settings.beneficiary;
+                        document.getElementById('checkout-copy-beneficiary').setAttribute('onclick', `copyText('${settings.beneficiary}', this)`);
+                    }
+                    if (settings.iban) {
+                        document.getElementById('checkout-bank-iban').textContent = settings.iban;
+                        const cleanIban = settings.iban.replace(/\s+/g, '');
+                        document.getElementById('checkout-copy-iban').setAttribute('onclick', `copyText('${cleanIban}', this)`);
+                    }
+                    if (settings.bic) {
+                        document.getElementById('checkout-bank-bic').textContent = settings.bic;
+                        document.getElementById('checkout-copy-bic').setAttribute('onclick', `copyText('${settings.bic}', this)`);
+                    }
+                }
+            } catch (error) {
+                console.error("Failed to fetch bank settings for checkout", error);
             }
         });
     </script>

@@ -12,10 +12,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const categoriesView = document.getElementById('categories-view');
     const categoryFormView = document.getElementById('category-form-view');
     const ordersView = document.getElementById('orders-view');
+    const settingsView = document.getElementById('settings-view');
     
     const btnAddItem = document.getElementById('btn-add-item');
     const mainHeading = document.getElementById('main-heading');
     const msgContainer = document.getElementById('message-container');
+    const navSettings = document.getElementById('nav-settings');
     
     const productForm = document.getElementById('product-form');
     const btnCancel = document.getElementById('btn-cancel');
@@ -39,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
         navProducts.classList.add('active');
         navCategories.classList.remove('active');
         navOrders.classList.remove('active');
+        navSettings.classList.remove('active');
         mainHeading.textContent = "Gestion des Produits";
         btnAddItem.textContent = "+ Ajouter un produit";
         showView('products');
@@ -51,6 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
         navCategories.classList.add('active');
         navProducts.classList.remove('active');
         navOrders.classList.remove('active');
+        navSettings.classList.remove('active');
         mainHeading.textContent = "Gestion des Catégories";
         btnAddItem.textContent = "+ Ajouter une catégorie";
         showView('categories');
@@ -63,10 +67,24 @@ document.addEventListener('DOMContentLoaded', () => {
         navOrders.classList.add('active');
         navProducts.classList.remove('active');
         navCategories.classList.remove('active');
+        navSettings.classList.remove('active');
         mainHeading.textContent = "Gestion des Commandes";
         btnAddItem.classList.add('hidden');
         showView('orders');
         fetchOrders();
+    });
+
+    navSettings.addEventListener('click', (e) => {
+        e.preventDefault();
+        currentTab = 'settings';
+        navSettings.classList.add('active');
+        navProducts.classList.remove('active');
+        navCategories.classList.remove('active');
+        navOrders.classList.remove('active');
+        mainHeading.textContent = "Coordonnées Bancaires";
+        btnAddItem.classList.add('hidden');
+        showView('settings');
+        fetchBankSettings();
     });
 
     // Add Item Button
@@ -138,6 +156,33 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    });
+
+    // Submit Bank Settings
+    const settingsBankForm = document.getElementById('settings-bank-form');
+    if (settingsBankForm) {
+        settingsBankForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const bankData = {
+                beneficiary: document.getElementById('bank-beneficiary').value,
+                iban: document.getElementById('bank-iban').value,
+                bic: document.getElementById('bank-bic').value
+            };
+            
+            try {
+                const response = await fetch('/api/settings', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ key: 'bank_details', value: bankData })
+                });
+                if (!response.ok) throw new Error('Erreur lors de la sauvegarde');
+                showMessage('Coordonnées bancaires enregistrées!', 'success');
+            } catch (error) {
+                showMessage(error.message, 'error');
+            }
+        });
+    }
+
     // Functions
     function showView(view) {
         productsView.classList.add('hidden');
@@ -145,6 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
         categoriesView.classList.add('hidden');
         categoryFormView.classList.add('hidden');
         ordersView.classList.add('hidden');
+        settingsView.classList.add('hidden');
         btnAddItem.classList.add('hidden');
 
         if (view === 'products') {
@@ -159,6 +205,8 @@ document.addEventListener('DOMContentLoaded', () => {
             categoryFormView.classList.remove('hidden');
         } else if (view === 'orders') {
             ordersView.classList.remove('hidden');
+        } else if (view === 'settings') {
+            settingsView.classList.remove('hidden');
         }
     }
 

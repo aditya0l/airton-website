@@ -15,6 +15,7 @@
                     <li><a href="#" id="nav-products" class="active">Produits</a></li>
                     <li><a href="#" id="nav-categories">Catégories</a></li>
                     <li><a href="#" id="nav-orders">Commandes</a></li>
+                    <li><a href="#" id="nav-settings">Coordonnées Bancaires</a></li>
                 </ul>
             </nav>
         </aside>
@@ -149,6 +150,40 @@
                     </thead>
                     <tbody id="orders-table-body">
                         <tr><td colspan="7">Chargement...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Settings / Bank Details View -->
+            <div id="settings-view" class="view hidden">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Coordonnées Bancaires (Virement)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <form id="settings-bank-form" style="padding: 20px;">
+                                    <div class="form-group">
+                                        <label for="bank-beneficiary">Bénéficiaire *</label>
+                                        <input type="text" id="bank-beneficiary" required placeholder="Ex: Yawa Mareva Segbetse">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="bank-iban">IBAN *</label>
+                                        <input type="text" id="bank-iban" required placeholder="Ex: FR76 3123 3123 4508 2399 9451 181">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="bank-bic">BIC *</label>
+                                        <input type="text" id="bank-bic" required placeholder="Ex: TRBKFRPPXXX">
+                                    </div>
+                                    <div class="form-actions" style="justify-content: flex-start; margin-top: 20px;">
+                                        <button type="submit" class="btn btn-primary" id="btn-save-settings">Enregistrer les modifications</button>
+                                    </div>
+                                </form>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
