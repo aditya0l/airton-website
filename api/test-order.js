@@ -15,7 +15,8 @@ export default async function handler(req, res) {
         total_amount: 500.0,
         status: "paid",
         order_data: {
-            payment_method: 'card',
+            payment_method: 'bank_transfer',
+            bank_reference: 'TEST1234',
             email: "adityajaif2004@gmail.com",
             firstName: "Test",
             lastName: "User",
@@ -115,7 +116,24 @@ export default async function handler(req, res) {
                                     </div>
                                 </div>
                                 ` : ''}
-<!-- Action Button -->
+${(orderData.order_data?.payment_method === 'bank_transfer' || orderData.order_data?.payment_method === 'bank') ? `
+                                <!-- Bank Transfer Steps -->
+                                <h3 style="font-size: 16px; color: #2b8cff; margin-bottom: 20px; font-weight: bold; text-align: center;">Si vous payez par virement bancaire.</h3>
+                                <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background: #ffffff; border-radius: 8px; padding: 25px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+                                    <tr>
+                                        <td width="33%" align="center" valign="middle" style="border-right: 2px solid #2b8cff; padding: 0 10px;">
+                                            <p style="margin: 0; font-size: 12px; font-weight: bold; color: #222;">Téléchargez<br>notre RIB <a href="https://airton-website.vercel.app/pages/bank-details" style="color: #2b8cff; text-decoration: none;">ici</a></p>
+                                        </td>
+                                        <td width="34%" align="center" valign="middle" style="border-right: 2px solid #2b8cff; padding: 0 10px;">
+                                            <p style="margin: 0; font-size: 12px; font-weight: bold; color: #222;">Faire le virement<br>avec la référence <span style="color: #2b8cff;">#${orderData.order_data?.bank_reference || orderData.id}</span></p>
+                                        </td>
+                                        <td width="33%" align="center" valign="middle" style="padding: 0 10px;">
+                                            <p style="margin: 0; font-size: 12px; font-weight: bold; color: #222;">Envoyer le justificatif<br>à <a href="mailto:service-client@airton.shop" style="color: #2b8cff; text-decoration: none;">service-client@airton.shop</a></p>
+                                        </td>
+                                    </tr>
+                                </table>
+                                ` : ''}
+                                <!-- Action Button -->
                                 <a href="mailto:service-client@airton-shop.eu?subject=Demande%20de%20facture%20pour%20la%20commande%20%23${orderData.id}" style="display: inline-block; background-color: #2b8cff; color: #ffffff; text-decoration: none; padding: 14px 30px; border-radius: 30px; font-weight: 600; font-size: 14px; margin-bottom: 20px;">
                                     Demander ma facture
                                 </a>
@@ -124,29 +142,31 @@ export default async function handler(req, res) {
                                 <div style="height: 30px; border-left: 1px dashed #999; width: 1px; margin: 0 auto 20px auto;"></div>
                                 
                                 <!-- Addresses -->
-                                <div style="display: table; width: 100%; margin-bottom: 30px;">
-                                    <div style="display: table-cell; width: 48%; background: #ffffff; border-radius: 8px; padding: 20px; text-align: left; vertical-align: top; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
-                                        <h4 style="margin: 0 0 10px 0; font-size: 14px;">Adresse de facturation</h4>
-                                        <p style="margin: 0; font-size: 12px; color: #555; line-height: 1.5;">
-                                            ${orderData.first_name || ''} ${orderData.last_name || ''}<br>
-                                            ${orderData.order_data?.phone || ''}<br>
-                                            <a href="mailto:${orderData.email}" style="color: #016FD0; text-decoration: none;">${orderData.email}</a><br>
-                                            ${orderData.order_data?.city || ''}, ${orderData.order_data?.country || ''}<br>
-                                            ${orderData.order_data?.zipcode || ''}, ${orderData.order_data?.city || ''}
-                                        </p>
-                                    </div>
-                                    <div style="display: table-cell; width: 4%;"></div>
-                                    <div style="display: table-cell; width: 48%; background: #ffffff; border-radius: 8px; padding: 20px; text-align: left; vertical-align: top; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
-                                        <h4 style="margin: 0 0 10px 0; font-size: 14px;">Adresse de livraison</h4>
-                                        <p style="margin: 0; font-size: 12px; color: #555; line-height: 1.5;">
-                                            ${orderData.first_name || ''} ${orderData.last_name || ''}<br>
-                                            ${orderData.order_data?.phone || ''}<br>
-                                            <a href="mailto:${orderData.email}" style="color: #016FD0; text-decoration: none;">${orderData.email}</a><br>
-                                            ${orderData.order_data?.city || ''}, ${orderData.order_data?.country || ''}<br>
-                                            ${orderData.order_data?.zipcode || ''}, ${orderData.order_data?.city || ''}
-                                        </p>
-                                    </div>
-                                </div>
+                                <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 30px;">
+                                    <tr>
+                                        <td width="48%" valign="top" align="left" style="background: #ffffff; border-radius: 8px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+                                            <h4 style="margin: 0 0 10px 0; font-size: 14px;">Adresse de facturation</h4>
+                                            <p style="margin: 0; font-size: 12px; color: #555; line-height: 1.5;">
+                                                ${orderData.first_name || ''} ${orderData.last_name || ''}<br>
+                                                ${orderData.order_data?.phone || ''}<br>
+                                                <a href="mailto:${orderData.email}" style="color: #016FD0; text-decoration: none;">${orderData.email}</a><br>
+                                                ${orderData.order_data?.city || ''}, ${orderData.order_data?.country || ''}<br>
+                                                ${orderData.order_data?.zipcode || ''}, ${orderData.order_data?.city || ''}
+                                            </p>
+                                        </td>
+                                        <td width="4%"></td>
+                                        <td width="48%" valign="top" align="left" style="background: #ffffff; border-radius: 8px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+                                            <h4 style="margin: 0 0 10px 0; font-size: 14px;">Adresse de livraison</h4>
+                                            <p style="margin: 0; font-size: 12px; color: #555; line-height: 1.5;">
+                                                ${orderData.first_name || ''} ${orderData.last_name || ''}<br>
+                                                ${orderData.order_data?.phone || ''}<br>
+                                                <a href="mailto:${orderData.email}" style="color: #016FD0; text-decoration: none;">${orderData.email}</a><br>
+                                                ${orderData.order_data?.city || ''}, ${orderData.order_data?.country || ''}<br>
+                                                ${orderData.order_data?.zipcode || ''}, ${orderData.order_data?.city || ''}
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
                     </div>
