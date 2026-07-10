@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://airton-website.vercel.app/sitemap.xml
