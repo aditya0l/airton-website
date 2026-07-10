@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /admin/
+Disallow: /login
 
-Sitemap: https://airton-website.vercel.app/sitemap.xml
+Sitemap: https://airton-shop.eu/sitemap.xml

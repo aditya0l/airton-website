@@ -1,18 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://airton-website.vercel.app/</loc>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://airton-website.vercel.app/pages/bank-details</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://airton-website.vercel.app/checkout</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
+<url><loc>https://airton-shop.eu/blogs/aides-etat-installation-pac</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/blogs/airton-blog-officiel</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/blogs/bruit-climatisation-comment-reduire</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/blogs/clim-ne-refroidit-plus</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/blogs/climatisation-monobloc</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/blogs/climatisation-readyclim-pret-a-poser</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/blogs/climatiseur-mobile-vs-fixe</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/blogs/comment-choisir-climatisation-reversible</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/blogs/difference-monosplit-multisplit</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/blogs/domotique-et-climatisation</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/blogs/economies-energie-clim-reversible</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/blogs/entretien-climatisation</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/blogs/faut-il-couvrir-climatisation-hiver</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/blogs/impact-ecologique-pompes-a-chaleur</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/blogs/installer-pompe-a-chaleur-soi-meme</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/blogs/meilleures-marques-climatiseurs</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/blogs/ou-placer-groupe-exterieur-clim</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/blogs/pompe-a-chaleur-avantages-inconvenients</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/blogs/pourquoi-climatisation-fuit</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/blogs/quelle-puissance-climatiseur-50m2</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/blogs/rafraichir-maison-sans-climatisation</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/cart</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/checkout-success</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/checkout</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/collections/accessoires-installation-climatiseur-reversible</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/collections/cache-climatiseur</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/collections/catalogue-airton</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/collections/climatiseur-reversible-pompe-chaleur-air-air</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/collections/climatiseurs-mobiles</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/collections/entretiens</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/collections/module-wifi</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+<url><loc>https://airton-shop.eu/pages/a-propos</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/pages/avis-clients-trustpilot</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/pages/bank-details</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/pages/cgv-garantie</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/pages/cgv-mise-en-relation-installation</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/pages/conditions-d-utilisation</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/pages/conditions-generales-de-vente</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/pages/contact</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/pages/garantie-premium</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/pages/livraison</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/pages/mentions-legales</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/pages/pack-serenite</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/pages/politique-de-remboursement</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/pages/questions-frequentes</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/pages/sav</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/products/airton-connecteur-r32-union-raccord-inter-liaison-readyclim-1-4-3-8</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/products/angle-apparent-coude-pour-goulotte</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/products/angle-exterieur-pour-goulotte</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/products/angle-exterieur-reglable-pour-goulotte</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/products/angle-interieur-pour-goulotte</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/products/angle-interieur-reglable-pour-goulotte</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/products/angle-plat-ajustable-pour-goulotte</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/products/angle-vertical-gauche-pour-goulotte</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/products/bande-isolante-adhesive-blanche</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/products/bande-isolante-adhesive-noire</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/products/cache-clim</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/products/cle-module-wifi-airton</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/products/climatiseur-fixe-reversible</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/products/climatiseur-mobile-reversible-2000w-1700w-7000btu</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/products/climatiseur-mobile-reversible-2600w-2000w-9000btu</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/products/climatiseur-mobile-reversible-3500w-2500w-12000btu</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/products/climatiseur-reversible-airstorm-pompe-a-chaleur-air-air-pac</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/products/climatiseur-reversible-fixe-mural-a</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/products/climatiseur-reversible-quadrisplit-x4-pompe-a-chaleur-air-air-pac</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/products/climatiseur-trisplit-reversible-2600w-2600w-3500w-30m-30m-40m</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/products/contrat-entretien-annuel</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/products/couverture-de-protection-pour-groupe-exterieur</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/products/demande-devis-installation</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/products/filtres-3-en-1</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/products/filtres-microbiologiques-airton-climatiseur</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/products/garantie-premium-annuelle</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/products/kit-module-wifi-pour-climatiseurs-airton-en-wifi-ready</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/products/liaison-ready-clim</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/products/monobloc-star-12hp-2-4-kw</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/products/pack-serenite</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/products/passage-de-mur-pour-goulotte</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/products/pompe-a-chaleur-climatiseur-bisplit</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/products/support-mural-reglable-a-niveau-integre</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/products/support-mural-traditionnel-avec-equerres</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/products/t-de-derivation-pour-goulotte</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://airton-shop.eu/search</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
 </urlset>
