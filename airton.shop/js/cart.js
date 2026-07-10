@@ -163,7 +163,7 @@ function setupAddToCartInterception() {
                 } else if (cartDrawer && cartDrawer.classList) {
                     cartDrawer.classList.add('is-active', 'active');
                     cartDrawer.removeAttribute('hidden');
-                    document.body.classList.add('overflow-hidden');
+                    // Removed overflow-hidden to prevent mobile scroll lock bug
                 }
             } else {
                 alert("Erreur: Impossible d'ajouter ce produit au panier.");
