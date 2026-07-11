@@ -343,7 +343,50 @@ document.addEventListener('DOMContentLoaded', () => {
                             alert("Aucune adresse complète enregistrée pour cette commande.");
                             return;
                         }
-                        alert(`Détails de Livraison:\n\nNom: ${orderData.firstName || ''} ${orderData.lastName || ''}\nEmail: ${orderData.email || ''}\nTéléphone: ${orderData.phone || ''}\n\nAdresse: ${orderData.address}\nVille: ${orderData.city}\nCode Postal: ${orderData.zipcode || orderData.zipCode || ''}\nPays: ${orderData.country || ''}`);
+                        
+                        const modalOverlay = document.createElement('div');
+                        modalOverlay.style.position = 'fixed';
+                        modalOverlay.style.top = '0';
+                        modalOverlay.style.left = '0';
+                        modalOverlay.style.width = '100vw';
+                        modalOverlay.style.height = '100vh';
+                        modalOverlay.style.backgroundColor = 'rgba(0,0,0,0.5)';
+                        modalOverlay.style.display = 'flex';
+                        modalOverlay.style.alignItems = 'center';
+                        modalOverlay.style.justifyContent = 'center';
+                        modalOverlay.style.zIndex = '9999';
+                        
+                        const modalContent = document.createElement('div');
+                        modalContent.style.backgroundColor = '#fff';
+                        modalContent.style.padding = '30px';
+                        modalContent.style.borderRadius = '8px';
+                        modalContent.style.width = '400px';
+                        modalContent.style.maxWidth = '90%';
+                        modalContent.style.boxShadow = '0 4px 15px rgba(0,0,0,0.2)';
+                        
+                        modalContent.innerHTML = `
+                            <h3 style="margin-top: 0; margin-bottom: 20px; color: #333;">Détails de Livraison</h3>
+                            <p style="margin: 0 0 5px 0;"><strong>Nom:</strong> ${orderData.firstName || ''} ${orderData.lastName || ''}</p>
+                            <p style="margin: 0 0 5px 0;"><strong>Email:</strong> ${orderData.email || ''}</p>
+                            <p style="margin: 0 0 20px 0;"><strong>Téléphone:</strong> ${orderData.phone || ''}</p>
+                            
+                            <h4 style="margin: 0 0 10px 0; color: #333;">Adresse</h4>
+                            <p style="margin: 0 0 5px 0;">${orderData.address}</p>
+                            <p style="margin: 0 0 5px 0;">${orderData.zipcode || orderData.zipCode || ''} ${orderData.city}</p>
+                            <p style="margin: 0 0 20px 0;">${orderData.country || ''}</p>
+                            
+                            <div style="text-align: right;">
+                                <button class="btn btn-primary" id="close-address-modal" style="padding: 8px 16px;">Fermer</button>
+                            </div>
+                        `;
+                        
+                        modalOverlay.appendChild(modalContent);
+                        document.body.appendChild(modalOverlay);
+                        
+                        document.getElementById('close-address-modal').addEventListener('click', () => {
+                            document.body.removeChild(modalOverlay);
+                        });
+                        
                     } catch(err) {
                         alert("Erreur lors de la lecture de l'adresse.");
                     }
