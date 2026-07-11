@@ -41,17 +41,40 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
 
         // Update Prices
-        // Assuming price classes like .price-item--regular
-        document.querySelectorAll('.price-item--regular').forEach(priceEl => {
-            priceEl.textContent = `€${product.price}`;
-        });
+        const priceContainers = document.querySelectorAll('.f-price');
         
-        // If there's a discount price
-        if (product.discount_price) {
-            document.querySelectorAll('.price-item--sale').forEach(priceEl => {
-                priceEl.textContent = `€${product.discount_price}`;
+        if (product.discount_price && parseFloat(product.discount_price) > 0 && parseFloat(product.discount_price) < parseFloat(product.price)) {
+            // It's on sale
+            priceContainers.forEach(container => {
+                container.classList.add('f-price--on-sale');
+                
+                const salePriceEls = container.querySelectorAll('.f-price-item--sale');
+                salePriceEls.forEach(el => { el.textContent = `${parseFloat(product.discount_price).toFixed(2)}€`; });
+                
+                // For the original price, update the <s> tag or wrap it in <s> if missing
+                const regularPriceEls = container.querySelectorAll('.f-price-item--regular');
+                regularPriceEls.forEach(el => {
+                    if (el.closest('.f-price__sale')) {
+                        const sTag = el.querySelector('s');
+                        if (sTag) {
+                            sTag.textContent = `${parseFloat(product.price).toFixed(2)}€`;
+                        } else {
+                            el.innerHTML = `<s>${parseFloat(product.price).toFixed(2)}€</s>`;
+                        }
+                    }
+                });
             });
-            // Show sale badge if applicable
+        } else {
+            // Not on sale
+            priceContainers.forEach(container => {
+                container.classList.remove('f-price--on-sale');
+                const regularPriceEls = container.querySelectorAll('.f-price-item--regular');
+                regularPriceEls.forEach(el => {
+                    if (!el.closest('.f-price__sale')) {
+                        el.textContent = `${parseFloat(product.price).toFixed(2)}€`;
+                    }
+                });
+            });
         }
 
         // Update Stock Status
