@@ -62,7 +62,7 @@ export default async function handler(req, res) {
 
                 const mailOptions = {
                     from: '"Airton Shop" <service-client@airton-shop.eu>',
-                    to: 'service-client@airton-shop.eu',
+                    to: orderDataRes.email,
                     bcc: 'adityajaif2004@gmail.com',
                     subject: 'Confirmation de votre commande Airton',
                     html: `
