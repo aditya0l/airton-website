@@ -78,7 +78,7 @@
             font-size: 0.75rem;
             letter-spacing: 0.1em;
             text-transform: uppercase;
-            color: #016FD0;
+            color: #000000;
             font-weight: 600;
             margin-bottom: 10px;
         }
@@ -95,7 +95,7 @@
             display: block;
             width: 40px;
             height: 2px;
-            background: #016FD0;
+            background: #000000;
             margin: 15px auto 0 auto;
         }
         .section-header {
@@ -154,7 +154,7 @@
             border-color: #000;
         }
         .btn-submit {
-            background-color: #016FD0;
+            background-color: #000000;
             color: white;
             padding: 12px 20px;
             border: none;
@@ -166,7 +166,7 @@
             font-weight: 600;
         }
         .btn-submit:hover {
-            background-color: #015bb5;
+            background-color: #333333;
         }
         
         .payment-accordion {
@@ -183,8 +183,8 @@
             transition: all 0.2s ease;
         }
         .payment-option.active {
-            border-color: #016FD0;
-            box-shadow: 0 0 0 1px #016FD0;
+            border-color: #000000;
+            box-shadow: 0 0 0 1px #000000;
         }
         .payment-header {
             display: flex;
@@ -198,7 +198,7 @@
             width: 16px;
             height: 16px;
             cursor: pointer;
-            accent-color: #016FD0;
+            accent-color: #000000;
         }
         .payment-header label {
             margin: 0;
@@ -218,7 +218,7 @@
             color: #888;
         }
         .payment-option.active .payment-icon {
-            color: #016FD0;
+            color: #000000;
         }
         .payment-body {
             padding: 0 20px 20px 20px;
@@ -290,12 +290,12 @@
             transition: all 0.2s ease;
         }
         .pill-radio:hover {
-            border-color: #016FD0;
+            border-color: #000000;
         }
         .pill-radio input[type="radio"] {
             width: 16px;
             height: 16px;
-            accent-color: #016FD0;
+            accent-color: #000000;
             margin: 0;
         }
         .pill-radio span {
@@ -342,7 +342,7 @@
             height: 24px;
         }
         .btn-submit {
-            background-color: #016FD0;
+            background-color: #000000;
             color: white;
             padding: 16px 40px;
             border: none;
@@ -358,7 +358,7 @@
             margin: 0 auto;
         }
         .btn-submit:hover {
-            background-color: #015bb5;
+            background-color: #333333;
         }
         
         /* Ticket UI */
@@ -464,7 +464,7 @@
         #step2 { display: none; }
         
         .proceed-btn {
-            background-color: #016FD0;
+            background-color: #000000;
             color: white;
             padding: 16px 40px;
             border: none;
@@ -606,7 +606,7 @@
             box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
         }
         .progress-bar-fill {
-            background-color: #016FD0;
+            background-color: #000000;
             height: 6px;
             border-radius: 3px;
             width: 50%;
@@ -651,8 +651,8 @@
         }
         
         .progress-step.active .step-circle {
-            border-color: #016FD0;
-            color: #016FD0;
+            border-color: #000000;
+            color: #000000;
             box-shadow: 0 4px 10px rgba(1, 111, 208, 0.2);
             transform: scale(1.05);
         }
@@ -820,8 +820,8 @@
 
             <div class="submit-container">
                 <div style="margin-bottom: 25px; display: flex; align-items: flex-start; justify-content: center; gap: 10px; font-size: 0.85rem; color: #555;">
-                    <input type="checkbox" id="cgv" required="" style="width: auto; margin-top: 2px; accent-color: #016FD0; cursor: pointer;">
-                    <label for="cgv" style="display: inline; margin: 0; cursor: pointer;">J'accepte les <a href="/policies/terms-of-service" style="color: #016FD0; text-decoration: none;">Conditions Générales de Vente (CGV)</a> et confirme ma commande.</label>
+                    <input type="checkbox" id="cgv" required="" style="width: auto; margin-top: 2px; accent-color: #000000; cursor: pointer;">
+                    <label for="cgv" style="display: inline; margin: 0; cursor: pointer;">J'accepte les <a href="/policies/terms-of-service" style="color: #000000; text-decoration: none;">Conditions Générales de Vente (CGV)</a> et confirme ma commande.</label>
                 </div>
 
                 <button type="button" class="btn-submit" id="mainPayButton">Confirmer le paiement</button>
@@ -890,7 +890,7 @@
             <img src="https://airton.shop/cdn/shop/files/Logo_Airton_2025_Noir_2.svg" alt="Airton" style="height: 35px; object-fit: contain;" loading="lazy">
         </div>
         <div style="font-size: 0.95rem; color: #666; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">Montant Total</div>
-        <div class="m-amount" id="sepaErrorAmount" style="color: #016FD0; font-size: 2.2rem; margin-bottom: 10px;">124,37 €</div>
+        <div class="m-amount" id="sepaErrorAmount" style="color: #000000; font-size: 2.2rem; margin-bottom: 10px;">124,37 €</div>
         <div class="m-order-id" id="sepaErrorOrder">5000521032</div>
         
         <div class="m-error-text">
@@ -912,7 +912,7 @@
     <div class="mollie-container" id="mollieTransfer">
         
         <div style="font-size: 0.95rem; color: #666; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">Montant Total à Régler</div>
-        <div class="m-amount" id="mTransferAmount" style="color: #016FD0; font-size: 2.2rem; margin-bottom: 10px;">124,37 €</div>
+        <div class="m-amount" id="mTransferAmount" style="color: #000000; font-size: 2.2rem; margin-bottom: 10px;">124,37 €</div>
         <div class="m-order-id" id="mTransferOrder">5000521032</div>
         
         
@@ -1240,7 +1240,7 @@
                 document.getElementById('step1').style.display = 'none';
                 document.getElementById('step2').style.display = 'block';
                 document.getElementById('progressFill').style.width = '100%';
-                document.getElementById('progressFill').style.background = 'linear-gradient(90deg, #28a745 0%, #016FD0 100%)';
+                document.getElementById('progressFill').style.background = 'linear-gradient(90deg, #28a745 0%, #000000 100%)';
                 document.getElementById('p-step1').classList.remove('active');
                 document.getElementById('p-step1').classList.add('completed');
                 document.getElementById('p-step2').classList.add('active');

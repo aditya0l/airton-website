@@ -192,6 +192,25 @@
             color: #777;
             text-decoration: underline;
         }
+
+        .continue-btn {
+            width: 100%;
+            background-color: #016FD0;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+        .continue-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
     </style>
 </head>
 <body>
@@ -226,13 +245,9 @@
         <form id="loginForm">
             <div class="input-group">
                 <input type="email" id="email" placeholder="Adresse e-mail" required="">
-                <button type="submit">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
-                </button>
             </div>
+            
+            <button type="submit" id="continueBtn" class="continue-btn" disabled>Continuer</button>
 
             <label class="checkbox-group">
                 <input type="checkbox" checked="">
@@ -246,6 +261,17 @@
     </div>
 
     <script>
+        const emailInput = document.getElementById('email');
+        const continueBtn = document.getElementById('continueBtn');
+        
+        emailInput.addEventListener('input', () => {
+            if (emailInput.checkValidity() && emailInput.value.trim() !== '') {
+                continueBtn.disabled = false;
+            } else {
+                continueBtn.disabled = true;
+            }
+        });
+
         document.getElementById('loginForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = document.getElementById('email').value;
