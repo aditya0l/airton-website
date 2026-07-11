@@ -295,7 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
     async function fetchOrders() {
         const orderTableBody = document.getElementById('orders-table-body');
         try {
-            const response = await fetch('/api/orders');
+            const response = await fetch('/api/orders?all=true');
             if (!response.ok) throw new Error('Erreur de chargement des commandes');
             const orders = await response.json();
             
