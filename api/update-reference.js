@@ -80,7 +80,7 @@ export default async function handler(req, res) {
                                 
 
                                 <!-- Header -->
-                                <h2 style="font-size: 24px; font-weight: bold; margin-bottom: 10px;">Votre commande est en attente de confirmation</h2>
+                                <h2 style="font-size: 24px; font-weight: bold; margin-bottom: 10px;">Votre commande a été confirmée</h2>
                                 <p style="font-size: 14px; color: #555; margin-bottom: 30px; line-height: 1.5;">
                                     Si vous constatez une erreur dans votre commande,<br>
                                     contactez nous à l'adresse : <a href="mailto:service-client@airton.shop" style="color: #016FD0; text-decoration: none;">service-client@airton.shop</a>
