@@ -1,4 +1,45 @@
-<!DOCTYPE html><html class="js" lang="fr" style="--scrollbar-width: 14px; overflow: visible;"><head><link rel="apple-touch-icon" href="https://cdn.pushowl.com/images/tr:cm-pad_resize,w-192,h-192,bg-FFFFFF00/airtonshop/default-46e17292-5ebd-4cd5-88de-d211de2b5e03-LogoAirton20251-1Noir.png?ik-s=7c7fa41ee9d0aaf880161a8f3c9ded2c592cc9b1" data-pushowl-manifest="true"><link rel="manifest" href="blob:https://airton.shop/625b66d9-dfd0-4d4e-9e95-293f4df44256" data-pushowl-manifest="true"><style data-hubspot-styled-components=""></style><style data-hubspot-styled-components=""></style>
+<!DOCTYPE html><html class="js" lang="fr" style="--scrollbar-width: 14px; overflow: visible;"><head>
+<script>
+if (sessionStorage.getItem('client_unlocked') !== 'true') {
+    document.documentElement.innerHTML = `
+        <head>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Website Unavailable</title>
+            <style>
+                body { margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background-color: #f8f9fa; font-family: 'Helvetica Neue', Arial, sans-serif; text-align: center; }
+                .lock-container { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); max-width: 400px; width: 90%; }
+                h2 { color: #333; font-size: 20px; margin-bottom: 15px; line-height: 1.4; }
+                p { color: #666; font-size: 14px; margin-bottom: 25px; }
+                input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 6px; font-size: 16px; box-sizing: border-box; }
+                button { width: 100%; padding: 12px; background: #0A70D6; color: white; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; transition: background 0.2s; }
+                button:hover { background: #085cb0; }
+                .error { color: #d32f2f; font-size: 14px; margin-top: 10px; display: none; }
+            </style>
+        </head>
+        <body>
+            <div class="lock-container">
+                <h2>Project Handover in Progress</h2>
+                <p>This website is currently unavailable while final project handover is being completed.</p>
+                <input type="password" id="passcode" placeholder="Enter Passcode" onkeypress="if(event.key === 'Enter') unlockSite()">
+                <button onclick="unlockSite()">Access Website</button>
+                <div id="error-msg" class="error">Incorrect passcode. Please try again.</div>
+            </div>
+            <script>
+                function unlockSite() {
+                    if (document.getElementById('passcode').value === 'airton2026') {
+                        sessionStorage.setItem('client_unlocked', 'true');
+                        location.reload();
+                    } else {
+                        document.getElementById('error-msg').style.display = 'block';
+                    }
+                }
+            <\/script>
+        </body>
+    `;
+    window.stop();
+}
+</script>
+<link rel="apple-touch-icon" href="https://cdn.pushowl.com/images/tr:cm-pad_resize,w-192,h-192,bg-FFFFFF00/airtonshop/default-46e17292-5ebd-4cd5-88de-d211de2b5e03-LogoAirton20251-1Noir.png?ik-s=7c7fa41ee9d0aaf880161a8f3c9ded2c592cc9b1" data-pushowl-manifest="true"><link rel="manifest" href="blob:https://airton.shop/625b66d9-dfd0-4d4e-9e95-293f4df44256" data-pushowl-manifest="true"><style data-hubspot-styled-components=""></style><style data-hubspot-styled-components=""></style>
     <!-- Start of Shoplift scripts -->
     <!-- 2026-05-07T22:45:04.9444536Z -->
 <style>.shoplift-hide { opacity: 0 !important; }</style>
