@@ -1,43 +1,46 @@
 <!DOCTYPE html><html lang="fr"><head>
 
 <script>
-window.unlockSite = function() {
-    if (document.getElementById('passcode').value === 'airton2026') {
-        sessionStorage.setItem('client_unlocked', 'true');
+window.unlockAdmin = function() {
+    if (document.getElementById('passcode').value === 'airtonadmin') {
+        sessionStorage.setItem('admin_unlocked', 'true');
         location.reload();
     } else {
         document.getElementById('error-msg').style.display = 'block';
     }
 };
-if (sessionStorage.getItem('client_unlocked') !== 'true') {
+if (sessionStorage.getItem('admin_unlocked') !== 'true') {
     document.documentElement.innerHTML = `
         <head>
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Website Unavailable</title>
+            <title>Admin Login</title>
             <style>
-                body { margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background-color: #f8f9fa; font-family: 'Helvetica Neue', Arial, sans-serif; text-align: center; }
-                .lock-container { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); max-width: 400px; width: 90%; }
-                h2 { color: #333; font-size: 20px; margin-bottom: 15px; line-height: 1.4; }
-                p { color: #666; font-size: 14px; margin-bottom: 25px; }
-                input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 6px; font-size: 16px; box-sizing: border-box; }
+                body { margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background-color: #1a1a1a; font-family: 'Helvetica Neue', Arial, sans-serif; text-align: center; }
+                .lock-container { background: #2a2a2a; padding: 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); max-width: 400px; width: 90%; }
+                h2 { color: #fff; font-size: 20px; margin-bottom: 15px; line-height: 1.4; }
+                p { color: #aaa; font-size: 14px; margin-bottom: 25px; }
+                input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #444; background: #333; color: white; border-radius: 6px; font-size: 16px; box-sizing: border-box; }
                 button { width: 100%; padding: 12px; background: #0A70D6; color: white; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; transition: background 0.2s; }
                 button:hover { background: #085cb0; }
-                .error { color: #d32f2f; font-size: 14px; margin-top: 10px; display: none; }
+                .error { color: #ff5252; font-size: 14px; margin-top: 10px; display: none; }
             </style>
         </head>
         <body>
             <div class="lock-container">
-                <h2>Project Handover in Progress</h2>
-                <p>This website is currently unavailable while final project handover is being completed.</p>
-                <input type="password" id="passcode" placeholder="Enter Passcode" onkeypress="if(event.key === 'Enter') window.unlockSite()">
-                <button onclick="window.unlockSite()">Access Website</button>
-                <div id="error-msg" class="error">Incorrect passcode. Please try again.</div>
+                <h2>Airton Admin Panel</h2>
+                <p>Please enter the admin passcode to access this section.</p>
+                <input type="password" id="passcode" placeholder="Enter Admin Passcode" onkeypress="if(event.key === 'Enter') window.unlockAdmin()">
+                <button onclick="window.unlockAdmin()">Login</button>
+                <div id="error-msg" class="error">Incorrect passcode.</div>
             </div>
         </body>
     `;
     window.stop();
 }
 </script>
+
+
+
 
 
     <meta charset="UTF-8">
