@@ -1,6 +1,16 @@
 <!DOCTYPE html><html lang="en"><head>
+
 <script>
 if (sessionStorage.getItem('client_unlocked') !== 'true') {
+    window.unlockSite = function() {
+        if (document.getElementById('passcode').value === 'airton2026') {
+            sessionStorage.setItem('client_unlocked', 'true');
+            location.reload();
+        } else {
+            document.getElementById('error-msg').style.display = 'block';
+        }
+    };
+    
     document.documentElement.innerHTML = `
         <head>
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,20 +30,10 @@ if (sessionStorage.getItem('client_unlocked') !== 'true') {
             <div class="lock-container">
                 <h2>Project Handover in Progress</h2>
                 <p>This website is currently unavailable while final project handover is being completed.</p>
-                <input type="password" id="passcode" placeholder="Enter Passcode" onkeypress="if(event.key === 'Enter') unlockSite()">
-                <button onclick="unlockSite()">Access Website</button>
+                <input type="password" id="passcode" placeholder="Enter Passcode" onkeypress="if(event.key === 'Enter') window.unlockSite()">
+                <button onclick="window.unlockSite()">Access Website</button>
                 <div id="error-msg" class="error">Incorrect passcode. Please try again.</div>
             </div>
-            <script>
-                function unlockSite() {
-                    if (document.getElementById('passcode').value === 'airton2026') {
-                        sessionStorage.setItem('client_unlocked', 'true');
-                        location.reload();
-                    } else {
-                        document.getElementById('error-msg').style.display = 'block';
-                    }
-                }
-            <\/script>
         </body>
     `;
     window.stop();
